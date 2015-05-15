@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: May 13, 2015 at 10:04 PM
+-- Generation Time: May 14, 2015 at 11:25 PM
 -- Server version: 5.5.43-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.9
 
@@ -82,6 +82,9 @@ CREATE TABLE IF NOT EXISTS `guilds` (
 CREATE TABLE IF NOT EXISTS `membership` (
   `gid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
+  `displayas` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `joined` datetime NOT NULL,
+  `quit` datetime NOT NULL,
   KEY `FK_guild_user` (`gid`),
   KEY `FK_user_guild` (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -162,8 +165,8 @@ ALTER TABLE `forums`
 -- Constraints for table `membership`
 --
 ALTER TABLE `membership`
-  ADD CONSTRAINT `membership_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `membership_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `guilds` (`gid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `membership_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `guilds` (`gid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `membership_ibfk_2` FOREIGN KEY (`uid`) REFERENCES `users` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `replies`
