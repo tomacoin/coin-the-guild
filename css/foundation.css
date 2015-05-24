@@ -6385,3 +6385,8 @@ ul.pagination {
   margin:auto;
   width: 330px;
 }
+
+.top-poster {
+  float: left;
+  margin-right: 15px;
+}
