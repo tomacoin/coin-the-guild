@@ -6389,4 +6389,5 @@ ul.pagination {
 .top-poster {
   float: left;
   margin-right: 15px;
+  border-radius: 5px;
 }
