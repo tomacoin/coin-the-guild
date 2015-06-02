@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 4.0.10deb1
+-- version 4.1.14
 -- http://www.phpmyadmin.net
 --
--- Host: localhost
--- Generation Time: May 14, 2015 at 11:25 PM
--- Server version: 5.5.43-0ubuntu0.14.04.1
--- PHP Version: 5.5.9-1ubuntu4.9
+-- Host: 127.0.0.1
+-- Generation Time: Jun 02, 2015 at 06:23 AM
+-- Server version: 5.6.17
+-- PHP Version: 5.5.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 SET time_zone = "+00:00";
@@ -19,6 +19,8 @@ SET time_zone = "+00:00";
 --
 -- Database: `cointheguild`
 --
+CREATE DATABASE IF NOT EXISTS `cointheguild` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
+USE `cointheguild`;
 
 -- --------------------------------------------------------
 
@@ -26,6 +28,7 @@ SET time_zone = "+00:00";
 -- Table structure for table `events`
 --
 
+DROP TABLE IF EXISTS `events`;
 CREATE TABLE IF NOT EXISTS `events` (
   `eid` int(11) NOT NULL,
   `gid` int(11) NOT NULL,
@@ -37,8 +40,8 @@ CREATE TABLE IF NOT EXISTS `events` (
   `enddate` date NOT NULL,
   `endtime` time NOT NULL,
   `occurence` int(11) NOT NULL,
-  UNIQUE KEY `FK_guild_event` (`gid`),
-  UNIQUE KEY `FK_owner_event` (`owner`)
+  KEY `FK_owner_event` (`owner`),
+  KEY `FK_guild_event` (`gid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
@@ -47,6 +50,7 @@ CREATE TABLE IF NOT EXISTS `events` (
 -- Table structure for table `forums`
 --
 
+DROP TABLE IF EXISTS `forums`;
 CREATE TABLE IF NOT EXISTS `forums` (
   `fid` int(11) NOT NULL AUTO_INCREMENT,
   `gid` int(11) NOT NULL,
@@ -54,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `forums` (
   `description` text NOT NULL,
   PRIMARY KEY (`fid`),
   UNIQUE KEY `FK_forum_guild` (`gid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -62,6 +66,7 @@ CREATE TABLE IF NOT EXISTS `forums` (
 -- Table structure for table `guilds`
 --
 
+DROP TABLE IF EXISTS `guilds`;
 CREATE TABLE IF NOT EXISTS `guilds` (
   `gid` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
@@ -71,7 +76,7 @@ CREATE TABLE IF NOT EXISTS `guilds` (
   `created` datetime NOT NULL,
   `game` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   PRIMARY KEY (`gid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=2 ;
 
 -- --------------------------------------------------------
 
@@ -79,10 +84,11 @@ CREATE TABLE IF NOT EXISTS `guilds` (
 -- Table structure for table `membership`
 --
 
+DROP TABLE IF EXISTS `membership`;
 CREATE TABLE IF NOT EXISTS `membership` (
   `gid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
-  `displayas` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `displayas` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `joined` datetime NOT NULL,
   `quit` datetime NOT NULL,
   KEY `FK_guild_user` (`gid`),
@@ -95,6 +101,7 @@ CREATE TABLE IF NOT EXISTS `membership` (
 -- Table structure for table `replies`
 --
 
+DROP TABLE IF EXISTS `replies`;
 CREATE TABLE IF NOT EXISTS `replies` (
   `rid` int(11) NOT NULL AUTO_INCREMENT,
   `tid` int(11) NOT NULL,
@@ -104,9 +111,9 @@ CREATE TABLE IF NOT EXISTS `replies` (
   `edited` datetime NOT NULL,
   `original` text NOT NULL,
   PRIMARY KEY (`rid`),
-  UNIQUE KEY `FK_reply_user` (`poster`),
-  UNIQUE KEY `FK_reply_thread` (`tid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `FK_reply_user` (`poster`),
+  KEY `FK_reply_thread` (`tid`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;
 
 -- --------------------------------------------------------
 
@@ -114,19 +121,21 @@ CREATE TABLE IF NOT EXISTS `replies` (
 -- Table structure for table `threads`
 --
 
+DROP TABLE IF EXISTS `threads`;
 CREATE TABLE IF NOT EXISTS `threads` (
   `tid` int(11) NOT NULL AUTO_INCREMENT,
+  `fid` int(11) DEFAULT NULL,
   `title` text NOT NULL,
   `poster` int(11) NOT NULL,
   `content` text NOT NULL,
   `posted` datetime NOT NULL,
   `edited` datetime DEFAULT NULL,
   `original` text,
-  `fid` int(11) DEFAULT NULL,
   PRIMARY KEY (`tid`),
-  UNIQUE KEY `FK_poster_user` (`poster`),
-  KEY `tid` (`tid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+  KEY `tid` (`tid`),
+  KEY `threads_ibfk_2` (`fid`),
+  KEY `FK_poster_user` (`poster`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
 
 -- --------------------------------------------------------
 
@@ -134,6 +143,7 @@ CREATE TABLE IF NOT EXISTS `threads` (
 -- Table structure for table `users`
 --
 
+DROP TABLE IF EXISTS `users`;
 CREATE TABLE IF NOT EXISTS `users` (
   `uid` int(10) NOT NULL AUTO_INCREMENT,
   `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
@@ -142,7 +152,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `joined` datetime NOT NULL,
   `lastlogin` datetime NOT NULL,
   PRIMARY KEY (`uid`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=4 ;
 
 --
 -- Constraints for dumped tables
@@ -152,8 +162,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Constraints for table `events`
 --
 ALTER TABLE `events`
-  ADD CONSTRAINT `events_ibfk_2` FOREIGN KEY (`owner`) REFERENCES `users` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `guilds` (`gid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `events_ibfk_1` FOREIGN KEY (`gid`) REFERENCES `guilds` (`gid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `events_ibfk_2` FOREIGN KEY (`owner`) REFERENCES `users` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `forums`
@@ -172,13 +182,14 @@ ALTER TABLE `membership`
 -- Constraints for table `replies`
 --
 ALTER TABLE `replies`
-  ADD CONSTRAINT `replies_ibfk_2` FOREIGN KEY (`poster`) REFERENCES `threads` (`poster`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `replies_ibfk_2` FOREIGN KEY (`poster`) REFERENCES `users` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `replies_ibfk_1` FOREIGN KEY (`tid`) REFERENCES `threads` (`tid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 --
 -- Constraints for table `threads`
 --
 ALTER TABLE `threads`
+  ADD CONSTRAINT `threads_ibfk_2` FOREIGN KEY (`fid`) REFERENCES `forums` (`fid`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   ADD CONSTRAINT `threads_ibfk_1` FOREIGN KEY (`poster`) REFERENCES `users` (`uid`) ON DELETE NO ACTION ON UPDATE NO ACTION;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
