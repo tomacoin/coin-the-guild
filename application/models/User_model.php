@@ -7,8 +7,38 @@ class User_model extends CI_Model {
         parent::__construct();
     }
 
-	function create_user ( $username, $password, $email ) {
+    function login($username,$password)
+	{
+		$this->db->where("username",$username);
+		$this->db->where("password",$password);
+
+		$query=$this->db->get("users");
 		
+		if($query->num_rows()>0)
+		{
+			foreach($query->result() as $rows)
+			{
+				//add all data to session
+				$newdata = array(
+					'uid'  => $rows->uid,
+					'username'  => $rows->username,
+					'email'    => $rows->email,
+					'logged_in'  => TRUE,
+				);
+			}
+			$this->session->set_userdata($newdata);
+			return true;
+		}		
+		return false;
+	}
+
+	function create_user () {
+		$data = array(
+			'username' => $this->input->post( 'username' ),
+			'email' => $this->input->post( 'email' ),
+			'password' => md5( $this->input->post( 'password' ) )
+		);
+		$this->db->insert( 'users', $data );
 	}
 
 	function change_password ( $uid, $oldpass, $newpass ) {
