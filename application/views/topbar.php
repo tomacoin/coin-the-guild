@@ -7,11 +7,14 @@
     <div class="large-12 columns">
       <h3 id="modalTitle">Register</h3>
       <p>Register to Syrin and become a member of Guild Name! All fields required.</p>
-        <input type="text" class="modal-input" placeholder="Username" />
-        <input type="text" class="modal-input" placeholder="E-mail" />
-        <input type="text" class="modal-input" placeholder="Password" />
-        <input type="text" class="modal-input" placeholder="Confirm Password" />
+        <?php echo validation_errors('<p class="error">'); ?>
+        <?php echo form_open("test/register"); ?>
+        <input type="text" name="username" id="username" class="modal-input" placeholder="Username" />
+        <input type="text" name="email" id="email" class="modal-input" placeholder="E-mail" />
+        <input type="text" name="password" id="password" class="modal-input" placeholder="Password" />
+        <input type="text" name="password2" id="password2" class="modal-input" placeholder="Confirm Password" />
         <input type="submit" value="Register" class="button large-12" \>
+        <?php echo form_close(); ?>
     </div>
   </div>  
 </form>
@@ -24,11 +27,13 @@
   <div class="row">
     <div class="large-12 columns">
       <h3 id="modalTitle">Log In</h3>
-        <input type="text" class="modal-input" placeholder="Username" />
-        <input type="text" class="modal-input" placeholder="Password" />
+        <?php echo form_open("test/login"); ?>
+        <input type="text" name="username" id="username" class="modal-input" placeholder="Username" />
+        <input type="text" name="password" id="password" class="modal-input" placeholder="Password" />
         <a href="#">Forgot Password?</a>
         <br /><br />
         <input type="submit" value="Log In" class="button large-12" \>
+        <?php echo form_close(); ?>
     </div>
   </div>  
 </form>
