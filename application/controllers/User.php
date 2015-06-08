@@ -9,7 +9,7 @@ class User extends CI_Controller {
 		$this->load->model('user_model');
 	}
 
-	public function index ()
+	public function index()
 	{
 		if(($this->session->userdata('user_name')!=""))
 		{
@@ -17,72 +17,53 @@ class User extends CI_Controller {
 		}
 		else{
 			$data['title']= 'Home';
-			$this->load->view('header_view',$data);
-			$this->load->view("register_view.php", $data);
-			$this->load->view('footer_view',$data);
+			$this->load->view('test',$data);
 		}
 	}
-
-	public function welcome()
+	
+	public function login()
 	{
-		$data['title']= 'Welcome';
-		$this->load->view('header_view',$data);
-		$this->load->view('welcome_view.php', $data);
-		$this->load->view('footer_view',$data);
-	}
+		$username = $this->input->post('username');
+		$password = md5($this->input->post('password'));
 
-	public function login ()
-	{
-		$email = $this->input->post('email');
-		$password = md5($this->input->post('pass'));
-
-		$result = $this->user_model->login($email,$password);
+		$result = $this->user_model->login($username,$password);
 		if($result) {
-			$this->welcome();
+			redirect('/');
 		} else  {
-			echo "Bad";
-			$this->index();
+			$this->load->view( 'login', array( 'error' => 'Invalid username or password' ) );
 		}
 	}
 
-	public function thank ()
+	public function register()
 	{
-		$data['title']= 'Thank';
-		$this->load->view('header_view',$data);
-		$this->load->view('thank_view.php', $data);
-		$this->load->view('footer_view',$data);
-	}
+		$this->load->library( 'form_validation' );
 
-	public function register ()
-	{
-		$this->load->library('form_validation');
-		// field name, error message, validation rules
-		$this->form_validation->set_rules('user_name', 'User Name', 'trim|required|min_length[4]');
-		$this->form_validation->set_rules('email_address', 'Your Email', 'trim|required|valid_email');
-		$this->form_validation->set_rules('password', 'Password', 'trim|required|min_length[4]|max_length[32]');
-		$this->form_validation->set_rules('con_password', 'Password Confirmation', 'trim|required|matches[password]');
+		$this->form_validation->set_rules( 'username', 'Username', 'trim|required|min_length[4]' );
+		$this->form_validation->set_rules( 'email', 'Email', 'trim|required|valid_email' );
+		$this->form_validation->set_rules( 'password', 'Password', 'trim|required|min_length[4]|max_length[32]' );
+		$this->form_validation->set_rules( 'password2', 'Password Confirmation', 'trim|required|matches[password]' );
 
 		if($this->form_validation->run() == FALSE)
 		{
-			$this->index();
+			$this->load->view('register');
 		}
 		else
 		{
 			$this->user_model->create_user();
-			$this->thank();
+			$this->index();
 		}
 	}
 
 	public function logout()
 	{
 		$newdata = array(
-			'user_id'   =>'',
-			'user_name'  =>'',
-			'user_email'     => '',
+			'uid'   =>'',
+			'username'  =>'',
+			'email'     => '',
 			'logged_in' => FALSE,
 		);
 		$this->session->unset_userdata($newdata );
 		$this->session->sess_destroy();
-		$this->index();
+		redirect('/');
 	}
 }
