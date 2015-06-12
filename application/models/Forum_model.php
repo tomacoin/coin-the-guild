@@ -85,16 +85,16 @@ class Forum_model extends CI_Model {
 
 	function get_forums ( $gid )
 	{
-		$query = $this->db->where('gid', $gid)->get('forums');
+		return $query = $this->db->where('gid', $gid)->get('forums');
 	}
 
 	function get_threads ( $fid )
 	{
-		$query = $this->db->where('fid', $fid)->get('threads');
+		return $query = $this->db->where('fid', $fid)->get('threads');
 	}
 
 	function get_replies ( $tid )
 	{
-		$query = $this->db->where('tid', $tid)->get('replies');
+		return $query = $this->db->where('tid', $tid)->get('replies');
 	}
 }

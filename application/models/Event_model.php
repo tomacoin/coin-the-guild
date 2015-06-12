@@ -7,33 +7,49 @@ class Event_model extends CI_Model {
         parent::__construct();
     }
 
-    function create_event ( $gid, $name, $desc, $times, $occurence ) {
-
-    	$times['startdate'];
-    	$times['starttime'];
-    	$times['enddate'];
-    	$times['endtime'];
-
+    function create_event ( $gid, $name, $desc, $times, $occurence )
+    {
+        $data = array(
+            'gid'           => $gid,
+            'owner'         => $owner,
+            'description'   => $desc,
+            'startdate'     => $times['startdate'],
+            'starttime'     => $times['starttime'],
+            'enddate'       => $times['enddate'],
+            'endtime'       => $times['endtime'],
+            'occurence'     => $occurence
+        );
+        $this->db->insert( 'events', $data );
     }
 
-    function edit_event ( $eid, $name, $desc, $times, $occurence ) {
-
-    	$times['startdate'];
-    	$times['starttime'];
-    	$times['enddate'];
-    	$times['endtime'];
-
+    function edit_event ( $eid, $name, $desc, $times, $occurence )
+    {
+        $data = array(
+            'owner'         => $owner,
+            'description'   => $desc,
+            'startdate'     => $times['startdate'],
+            'starttime'     => $times['starttime'],
+            'enddate'       => $times['enddate'],
+            'endtime'       => $times['endtime'],
+            'occurence'     => $occurence
+        );
+        $this->db->where('eid', $eid)
+        $this->db->update( 'events', $data );
     }
 
-    function delete_event ( $eid ) {
-
+    function delete_event ( $eid )
+    {
+        $this->db->where('eid', $eid)
+        $this->db->delete( 'events' );
     }
 
-    function get_events ( $gid ) {
-
+    function get_events ( $gid )
+    {
+        return $query = $this->db->where('gid', $gid)->get('events');
     }
 
-    function get_event ( $eid ) {
-    	
+    function get_event ( $eid )
+    {
+    	return $query = $this->db->where('eid', $eid)->get('events');
     }
 }
