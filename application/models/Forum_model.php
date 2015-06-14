@@ -36,9 +36,11 @@ class Forum_model extends CI_Model {
 	function create_thread ( $fid, $title, $content )
 	{
 		$data = array(
-			'fid' => $fid,
-			'title' => $title,
-			'content' => $content
+			'fid' 		=> $fid,
+			'title' 	=> $title,
+			'poster' 	=> $this->session->userdata('uid'),
+			'posted' 	=> date('Y-m-d H:i:s'),
+			'content' 	=> $content
 		);
 		$this->db->insert( 'threads', $data );
 	}
@@ -46,8 +48,9 @@ class Forum_model extends CI_Model {
 	function edit_thread ( $tid, $title, $content )
 	{
 		$data = array(
-			'title' => $title,
-			'content' => $content
+			'title' 	=> $title,
+			'content' 	=> $content,
+			'edited' 	=> date('Y-m-d H:i:s')
 		);
 		$this->db->where('tid', $tid)
 		$this->db->update( 'threads', $data );
@@ -63,7 +66,9 @@ class Forum_model extends CI_Model {
 	{
 		$data = array(
 			'tid' => $tid,
-			'content' => $content
+			'content' => $content,
+			'poster' 	=> $this->session->userdata('uid'),
+			'posted' 	=> date('Y-m-d H:i:s')
 		);
 		$this->db->insert( 'replies', $data );
 	}

@@ -11,7 +11,7 @@ class Event_model extends CI_Model {
     {
         $data = array(
             'gid'           => $gid,
-            'owner'         => $owner,
+            'owner'         => $this->session->userdata('uid'),
             'description'   => $desc,
             'startdate'     => $times['startdate'],
             'starttime'     => $times['starttime'],
@@ -25,7 +25,6 @@ class Event_model extends CI_Model {
     function edit_event ( $eid, $name, $desc, $times, $occurence )
     {
         $data = array(
-            'owner'         => $owner,
             'description'   => $desc,
             'startdate'     => $times['startdate'],
             'starttime'     => $times['starttime'],
