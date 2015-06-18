@@ -1,5 +1,7 @@
 <?php include( 'header.php' ); ?>
-
+<?php 
+var_dump( $threads );
+?>
             <div class="row">
                 <div class="large-12 columns">
                     <div class="row">
@@ -15,12 +17,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+
+                                <?php foreach( $threads as $thread ): ?>
                                     <tr>
                                         <td>
-                                            <h5><a href="#">Thread Title Testing</a></h5>
+                                            <h5><a href="#"><?php echo $thread->title; ?></a></h5>
                                             <h6 class="subheader">
                                                 Posted by 
-                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">Holt0n</span> at 03:00PM 12/13/14
+                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $thread->username; ?></span> at <?php echo $thread->posted; ?>
                                             </h6>
                                         </td>
                                         <td class="text-right"> 
@@ -28,66 +32,7 @@
                                         </td>
                                         <td class="text-center">13</td>
                                     </tr>
-                                    <tr>
-                                        <td>
-                                            <h5><a href="#">Thread Title Testing</a></h5>
-                                            <h6 class="subheader">
-                                                Posted by <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">Holt0n</span> at 03:00PM 12/13/14
-                                            </h6>
-                                        </td>
-                                        <td class="text-right"> 
-                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">BanishYou56</span><br /> <a href="">45m ago &raquo;</a>
-                                        </td>
-                                        <td class="text-center">13</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h5><a href="#">Post Pictures of your Weapon Thread</a></h5>
-                                            <h6 class="subheader">
-                                                Posted by <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">Holt0n</span> at 03:00PM 12/13/14
-                                            </h6>
-                                        </td>
-                                        <td class="text-right"> 
-                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">BanishYou56</span><br /> <a href="">1hr ago &raquo;</a>
-                                        </td>
-                                        <td class="text-center">13</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h5><a href="#">I am having quest problems with Guntar's Lost Cat</a></h5>
-                                            <h6 class="subheader">
-                                                Posted by <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">Holt0n</span> at 03:00PM 12/13/14
-                                            </h6>
-                                        </td>
-                                        <td class="text-right"> 
-                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">BanishYou56</span><br /> <a href="">8hr ago &raquo;</a>
-                                        </td>
-                                        <td class="text-center">13</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h5><a href="#">[GUIDE] Get all achievements on Sunspark Island</a></h5>
-                                            <h6 class="subheader">
-                                                Posted by <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">Holt0n</span> at 03:00PM 12/13/14
-                                            </h6>
-                                        </td>
-                                        <td class="text-right"> 
-                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">BanishYou56</span><br /> <a href="">12/13/14 &raquo;</a>
-                                        </td>
-                                        <td class="text-center">13</td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <h5><a href="#">Thread Title Testing</a></h5>
-                                            <h6 class="subheader">
-                                                Posted by <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">Holt0n</span> at 03:00PM 12/13/14
-                                            </h6>
-                                        </td>
-                                        <td class="text-right"> 
-                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">BanishYou56</span><br /> <a href="">12/13/14 &raquo;</a>
-                                        </td>
-                                        <td class="text-center">13</td>
-                                    </tr>
+                                <?php endforeach; ?>
                                 </tbody>
                             </table>
 

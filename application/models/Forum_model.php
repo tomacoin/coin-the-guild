@@ -23,13 +23,13 @@ class Forum_model extends CI_Model {
 			'name' => $name,
 			'desciption' => $desc
 		);
-		$this->db->where('fid', $fid)
+		$this->db->where('fid', $fid);
 		$this->db->update( 'forums', $data );
 	}
 
 	function delete_forum ( $fid )
 	{
-		$this->db->where('fid', $fid)
+		$this->db->where('fid', $fid);
 		$this->db->delete( 'forums' );
 	}
 
@@ -52,13 +52,13 @@ class Forum_model extends CI_Model {
 			'content' 	=> $content,
 			'edited' 	=> date('Y-m-d H:i:s')
 		);
-		$this->db->where('tid', $tid)
+		$this->db->where('tid', $tid);
 		$this->db->update( 'threads', $data );
 	}
 
 	function delete_thread ( $tid )
 	{
-		$this->db->where('tid', $tid)
+		$this->db->where('tid', $tid);
 		$this->db->delete( 'threads' );
 	}
 
@@ -78,13 +78,13 @@ class Forum_model extends CI_Model {
 		$data = array(
 			'content' => $content
 		);
-		$this->db->where('rid', $rid)
+		$this->db->where('rid', $rid);
 		$this->db->update( 'threads', $data );
 	}
 
 	function delete_reply ( $rid )
 	{
-		$this->db->where('rid', $rid)
+		$this->db->where('rid', $rid);
 		$this->db->delete( 'threads' );
 	}
 
@@ -95,7 +95,13 @@ class Forum_model extends CI_Model {
 
 	function get_threads ( $fid )
 	{
-		return $query = $this->db->where('fid', $fid)->get('threads');
+		$this->db->select('tid, title, posted, username');
+		$this->db->where('fid', $fid);
+		$this->db->join('users', 'users.uid = threads.poster');
+
+		$query = $this->db->get('threads')->result();
+		var_dump( $this->db->last_query() );
+		return $query;
 	}
 
 	function get_replies ( $tid )
