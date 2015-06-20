@@ -95,12 +95,28 @@ class Forum_model extends CI_Model {
 
 	function get_threads ( $fid )
 	{
-		$this->db->select('tid, title, posted, username');
-		$this->db->where('fid', $fid);
-		$this->db->join('users', 'users.uid = threads.poster');
+		$this->db->select(' 
+			threads.tid,
+			threads.title,
+			threads.posted,
+			threaduser.username as \'poster\',
+			replyuser.username as \'replier\',
+			(
+			SELECT COUNT(tid) FROM replies WHERE replies.tid = threads.tid GROUP BY tid
+			) as postcount,
+			(
+			SELECT posted FROM replies WHERE replies.tid = threads.tid ORDER BY replies.posted DESC LIMIT 1
+			) as lastreplytime
+			FROM threads
+			LEFT JOIN users AS threaduser ON threaduser.uid = threads.poster
+			LEFT JOIN users AS replyuser ON replyuser.uid = 
+				(
+				SELECT poster FROM replies WHERE replies.tid = threads.tid ORDER BY replies.posted DESC LIMIT 1
+				)
+			WHERE fid = 1'
+		);
 
-		$query = $this->db->get('threads')->result();
-		var_dump( $this->db->last_query() );
+		$query = $this->db->get()->result();
 		return $query;
 	}
 

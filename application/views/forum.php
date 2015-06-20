@@ -1,7 +1,4 @@
 <?php include( 'header.php' ); ?>
-<?php 
-var_dump( $threads );
-?>
             <div class="row">
                 <div class="large-12 columns">
                     <div class="row">
@@ -24,13 +21,13 @@ var_dump( $threads );
                                             <h5><a href="#"><?php echo $thread->title; ?></a></h5>
                                             <h6 class="subheader">
                                                 Posted by 
-                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $thread->username; ?></span> at <?php echo $thread->posted; ?>
+                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $thread->poster; ?></span> at <?php echo $thread->posted; ?>
                                             </h6>
                                         </td>
                                         <td class="text-right"> 
-                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">BanishYou56</span><br /> <a href="">27m ago &raquo;</a>
+                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $thread->replier; ?></span><br /> <a href=""><?php echo $thread->lastreplytime; ?> &raquo;</a>
                                         </td>
-                                        <td class="text-center">13</td>
+                                        <td class="text-center"><?php echo $thread->postcount; ?></td>
                                     </tr>
                                 <?php endforeach; ?>
                                 </tbody>
