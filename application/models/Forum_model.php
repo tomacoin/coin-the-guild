@@ -97,16 +97,16 @@ class Forum_model extends CI_Model {
 	{
 		$this->db->select(' 
 			threads.tid,
-			threads.title,
-			threads.posted,
-			threaduser.username as \'poster\',
-			replyuser.username as \'replier\',
+			threads.title as \'thread_title\',
+			threads.posted as \'thread_time\',
+			threaduser.username as \'thread_poster\',
+			replyuser.username as \'reply_poster\',
 			(
 			SELECT COUNT(tid) FROM replies WHERE replies.tid = threads.tid GROUP BY tid
-			) as postcount,
+			) as reply_count,
 			(
 			SELECT posted FROM replies WHERE replies.tid = threads.tid ORDER BY replies.posted DESC LIMIT 1
-			) as lastreplytime
+			) as reply_time
 			FROM threads
 			LEFT JOIN users AS threaduser ON threaduser.uid = threads.poster
 			LEFT JOIN users AS replyuser ON replyuser.uid = 

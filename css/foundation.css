@@ -6381,8 +6381,13 @@ body {
   margin-left: 15px;
 }
 
-ul.pagination {
-  margin:auto;
+.pagination.thread {
+  float: right;
+  width: 330px;
+}
+
+.pagination.forum {
+  margin: auto;
   width: 330px;
 }
 
@@ -6390,4 +6395,13 @@ ul.pagination {
   float: left;
   margin-right: 15px;
   border-radius: 5px;
+}
+
+table.thread td {
+  vertical-align:top;
+  padding: 20px;
+}
+
+fieldset.reply {
+  margin-top: 70px;
 }
