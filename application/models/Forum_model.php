@@ -120,8 +120,36 @@ class Forum_model extends CI_Model {
 		return $query;
 	}
 
-	function get_replies ( $tid )
+	function get_thread ( $tid )
 	{
-		return $query = $this->db->where('tid', $tid)->get('replies');
+		$this->db->select(' 
+			title, 
+			content, 
+			posted, 
+			edited, 
+			username as \'username\'
+			FROM threads
+			JOIN users ON users.uid = threads.poster 
+			WHERE tid = 2'
+		);
+
+		$query = $this->db->get()->result();
+		return $query[0];
+	}
+
+	function get_replies ( $tid )
+	{		
+		$this->db->select('
+			content,
+			posted,
+			edited,
+			username as \'username\'
+			FROM replies
+			JOIN users ON users.uid = replies.poster 
+			WHERE tid = 2'
+		);
+
+		$query = $this->db->get()->result();
+		return $query;
 	}
 }

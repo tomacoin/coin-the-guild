@@ -14,4 +14,11 @@ class Forum extends CI_Controller {
 		$data = $this->fm->get_threads( 1 );
 		$this->load->view('forum', array ( 'threads' => $data ) );
 	}
+
+	public function thread( $tid )
+	{
+		$thread = $this->fm->get_thread( $tid );
+		$replies = $this->fm->get_replies( $tid );
+		$this->load->view( 'thread', array ( 'thread' => $thread, 'replies' => $replies ) );
+	}
 }
