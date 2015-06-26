@@ -1,11 +1,20 @@
 <?php include( 'header.php' ); ?>
-
             <div class="row">
                 <div class="large-12 columns">
                     <div class="row">
                         <div class="large-8 small-12 columns">
 
                             <h4>Events</h4><hr>
+                            <?php foreach( $events as $event ): ?>
+                            <div class="panel">
+                                <h5><a href="#"><?php echo $event->name ?></a></h5>
+                                <p><?php echo $event->startdate . ' ' . $event->starttime ?> <small>(in 1:34 hours)</small><br />
+                                <?php echo $event->occurence ?> @ Guild Headquarters</p>
+                                <h6 class="subheader">
+                                    <?php echo $event->description ?>
+                                </h6>
+                            </div>
+                            <?php endforeach; ?>
                             <div class="panel">
                                 <h5><a href="#">Event Title 1</a></h5>
                                 <p>13/08/2015 4:00PM <small>(in 1:34 hours)</small><br />

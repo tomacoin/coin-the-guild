@@ -32,19 +32,22 @@ class Event_model extends CI_Model {
             'endtime'       => $times['endtime'],
             'occurence'     => $occurence
         );
-        $this->db->where('eid', $eid)
+        $this->db->where('eid', $eid);
         $this->db->update( 'events', $data );
     }
 
     function delete_event ( $eid )
     {
-        $this->db->where('eid', $eid)
+        $this->db->where('eid', $eid);
         $this->db->delete( 'events' );
     }
 
     function get_events ( $gid )
     {
-        return $query = $this->db->where('gid', $gid)->get('events');
+        $this->db->where('gid', $gid);
+        $this->db->from('events');
+        $query = $this->db->get()->result();
+        return $query;
     }
 
     function get_event ( $eid )
