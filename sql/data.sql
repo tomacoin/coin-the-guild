@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 02, 2015 at 06:25 AM
+-- Generation Time: Jun 29, 2015 at 01:53 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -19,8 +19,6 @@ SET time_zone = "+00:00";
 --
 -- Database: `cointheguild`
 --
-CREATE DATABASE IF NOT EXISTS `cointheguild` DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci;
-USE `cointheguild`;
 
 --
 -- Dumping data for table `events`
@@ -49,10 +47,10 @@ INSERT INTO `guilds` (`gid`, `name`, `owner`, `motto`, `description`, `created`,
 -- Dumping data for table `membership`
 --
 
-INSERT INTO `membership` (`gid`, `uid`, `displayas`, `joined`, `quit`) VALUES
-(1, 1, 'Satoshi', '2015-06-01 21:51:24', '0000-00-00 00:00:00'),
-(1, 2, '000F', '2015-06-01 21:51:38', '0000-00-00 00:00:00'),
-(1, 3, NULL, '2015-06-01 21:53:58', '0000-00-00 00:00:00');
+INSERT INTO `membership` (`gid`, `uid`, `role`, `displayas`, `joined`, `quit`) VALUES
+(1, 1, 0, 'Satoshi', '2015-06-01 21:51:24', '0000-00-00 00:00:00'),
+(1, 2, 0, '000F', '2015-06-01 21:51:38', '0000-00-00 00:00:00'),
+(1, 3, 0, NULL, '2015-06-01 21:53:58', '0000-00-00 00:00:00');
 
 --
 -- Dumping data for table `replies`
@@ -60,7 +58,8 @@ INSERT INTO `membership` (`gid`, `uid`, `displayas`, `joined`, `quit`) VALUES
 
 INSERT INTO `replies` (`rid`, `tid`, `poster`, `content`, `posted`, `edited`, `original`) VALUES
 (2, 2, 3, 'This is a very good guide', '2015-06-01 23:20:25', '0000-00-00 00:00:00', ''),
-(3, 2, 2, 'I agree with this comment', '2015-06-01 23:20:51', '0000-00-00 00:00:00', '');
+(3, 2, 2, 'I agree with this comment', '2015-06-01 23:20:51', '0000-00-00 00:00:00', ''),
+(5, 2, 4, 'Wow where did you get this information', '2015-06-19 23:43:54', '0000-00-00 00:00:00', '');
 
 --
 -- Dumping data for table `threads`
@@ -74,10 +73,14 @@ INSERT INTO `threads` (`tid`, `fid`, `title`, `poster`, `content`, `posted`, `ed
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`uid`, `username`, `password`, `email`, `joined`, `lastlogin`) VALUES
-(1, 'satoshi', 'password', 'no@no.com', '2015-06-01 21:14:10', '2015-06-01 21:14:11'),
-(2, '0001', 'password', 'yes@yes.com', '2015-06-01 21:14:28', '2015-06-01 21:14:29'),
-(3, '12egg', 'password', 'maybe@maybe.com', '2015-06-01 21:28:50', '2015-06-01 21:28:50');
+INSERT INTO `users` (`uid`, `username`, ``, `email`, `joined`, `lastlogin`) VALUES
+(1, 'satoshi', '', 'no@no.com', '2015-06-01 21:14:10', '2015-06-01 21:14:11'),
+(2, '0001', '', 'yes@yes.com', '2015-06-01 21:14:28', '2015-06-01 21:14:29'),
+(3, '12egg', '', 'maybe@maybe.com', '2015-06-01 21:28:50', '2015-06-01 21:28:50'),
+(4, 'coool', '', 'coool@mail.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(5, '66six', '', '6@6.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(12, 'faceless', '', 'face@less.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00'),
+(13, 'tr1tr1', '', 'test@test.com', '0000-00-00 00:00:00', '0000-00-00 00:00:00');
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
