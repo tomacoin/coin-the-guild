@@ -123,6 +123,7 @@ class Forum_model extends CI_Model {
 	function get_thread ( $tid )
 	{
 		$this->db->select(' 
+			tid,
 			title, 
 			content, 
 			posted, 
@@ -130,7 +131,7 @@ class Forum_model extends CI_Model {
 			username as \'username\'
 			FROM threads
 			JOIN users ON users.uid = threads.poster 
-			WHERE tid = 2'
+			WHERE tid = ' . $tid
 		);
 
 		$query = $this->db->get()->result();
@@ -146,7 +147,7 @@ class Forum_model extends CI_Model {
 			username as \'username\'
 			FROM replies
 			JOIN users ON users.uid = replies.poster 
-			WHERE tid = 2'
+			WHERE tid = ' . $tid
 		);
 
 		$query = $this->db->get()->result();

@@ -74,16 +74,20 @@
                               <li><a href="">13</a></li>
                               <li class="arrow"><a href="">&raquo;</a></li>
                             </ul>
-                            <form>
-                              <fieldset class="reply">
-                                <legend>Reply</legend>
+                            <fieldset class="reply">
+                            <legend>Post Reply</legend>
+                            <?php if( $this->session->userdata('username') ): ?>
+                              <?php echo form_open(""); ?>                                    
+                                    <?php echo validation_errors('<p class="error">'); ?>
+                                    <input type="hidden" name="thread" id="thread" value="<?php echo $thread->tid; ?>">
+                                    <textarea placeholder="Enter Reply" name="reply" id="reply" rows="12"></textarea>
+                                    <input class="button secondary" type="submit" value="Post">                                
+                              <?php echo form_close(); ?>
+                            <?php else: ?>
+                                <p>You must be a member in order to reply.</p>
+                            <?php endif; ?>
+                                
 
-                                <label>Input Label
-                                  <textarea placeholder="small-12.columns" rows="12"></textarea>
-                                  <input class="button secondary" type="submit">
-                                </label>
-                              </fieldset>
-                            </form>
                     </div>
                 </div>
             </div>

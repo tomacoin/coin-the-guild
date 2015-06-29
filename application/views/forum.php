@@ -18,7 +18,7 @@
                                 <?php foreach( $threads as $thread ): ?>
                                     <tr>
                                         <td>
-                                            <h5><a href="#"><?php echo $thread->thread_title; ?></a></h5>
+                                            <h5><a href="forum/thread/<?php echo $thread->tid; ?>"><?php echo $thread->thread_title; ?></a></h5>
                                             <h6 class="subheader">
                                                 Posted by 
                                                 <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $thread->thread_poster; ?></span> at <?php echo $thread->thread_time; ?>
@@ -33,7 +33,7 @@
                                 </tbody>
                             </table>
 
-                                                        <ul class="forum pagination">
+                            <ul class="forum pagination">
                               <li class="arrow unavailable"><a href="">&laquo;</a></li>
                               <li class="current"><a href="">1</a></li>
                               <li><a href="">2</a></li>
