@@ -1,6 +1,4 @@
-
 <div id="registermodal" class="reveal-modal large-6" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-  
 
 
   <div class="row">
@@ -45,7 +43,7 @@
             <li class="name">
                 <h1>
                     <a href="#">
-                        Top Bar Title
+                        <?php echo $guild; ?>
                     </a>
                 </h1>
             </li>
@@ -55,6 +53,9 @@
         <section class="top-bar-section">
           <?php if( $this->session->userdata('username') ): ?>
             <ul class="right">
+                <?php if( !$is_member ): ?>
+                <li><?php echo anchor('guild/join', 'Join', array('class' => 'button')); ?></li>
+                <?php endif; ?>
                 <li><a><?php echo $this->session->userdata('username'); ?></a></li>
                 <li class="divider"></li>
                 <li><?php echo anchor('user/logout', 'Logout'); ?></li>

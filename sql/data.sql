@@ -73,7 +73,7 @@ INSERT INTO `threads` (`tid`, `fid`, `title`, `poster`, `content`, `posted`, `ed
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`uid`, `username`, ``, `email`, `joined`, `lastlogin`) VALUES
+INSERT INTO `users` (`uid`, `username`, `password`, `email`, `joined`, `lastlogin`) VALUES
 (1, 'satoshi', '', 'no@no.com', '2015-06-01 21:14:10', '2015-06-01 21:14:11'),
 (2, '0001', '', 'yes@yes.com', '2015-06-01 21:14:28', '2015-06-01 21:14:29'),
 (3, '12egg', '', 'maybe@maybe.com', '2015-06-01 21:28:50', '2015-06-01 21:28:50'),

@@ -25,6 +25,16 @@ class Guild_model extends CI_Model {
 
     }
 
+    function get_name ( $gid ) 
+    {
+        $this->db->
+            select('name')->
+            from('guilds')->
+            where('gid', $gid);
+
+        return $this->db->get()->row()->name;
+    }
+
     function get_guild ( $gid ) 
     {
         $query = $this->db->where('gid', $gid)->get();
@@ -61,16 +71,22 @@ class Guild_model extends CI_Model {
 
     }
 
-    function is_member ( $uid, $gid ) 
+    function is_member ( $gid, $uid ) 
     {
+        $this->db->
+            from('membership')->
+            where('gid', $gid)->
+            where('uid', $uid);
 
+        return $this->db->get()->num_rows();
     }
 
-    function join ( $uid, $gid ) 
+    function join ( $gid, $uid ) 
     {
         $data = array(
             'gid' => $gid,
-            'uid' => $uid
+            'uid' => $uid,
+            'role' => 0
         );
         $this->db->insert( 'membership', $data );
     }

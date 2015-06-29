@@ -1,3 +1,9 @@
+<?php
+$uid = $this->session->userdata('uid');
+$username = $this->session->userdata('username');
+$guild = $this->gm->get_name( 1 );
+$is_member = $this->gm->is_member( 1, $uid );
+?>
 <!doctype html>
 <html class="no-js" lang="en">
     <head>
