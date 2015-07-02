@@ -6405,3 +6405,7 @@ table.thread td {
 fieldset.reply {
   margin-top: 70px;
 }
+
+.new-thread {
+  float: right;
+}

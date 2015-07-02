@@ -5,6 +5,7 @@
                         <div class="large-8 small-12 columns">
 
                             <h4>Forum</h4><hr>
+                            <?php echo anchor('forum/thread/new', 'New Thread', array('class' => 'text-right small button secondary new-thread')); ?>
                             <table width="100%">
                                 <thead>
                                     <tr>

@@ -1,6 +1,4 @@
 <div id="registermodal" class="reveal-modal large-6" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
-
-
   <div class="row">
     <div class="large-12 columns">
       <h3 id="modalTitle">Register</h3>
