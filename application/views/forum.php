@@ -4,8 +4,8 @@
                     <div class="row">
                         <div class="large-8 small-12 columns">
 
-                            <h4>Forum</h4><hr>
-                            <?php echo anchor('forum/thread/new', 'New Thread', array('class' => 'text-right small button secondary new-thread')); ?>
+                            <h4>Forum<?php echo anchor('forum/thread/new', 'New Thread', array('class' => 'text-right small button secondary new-thread')); ?></h4>
+                            
                             <table width="100%">
                                 <thead>
                                     <tr>

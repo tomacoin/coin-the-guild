@@ -12,6 +12,7 @@ class Event_model extends CI_Model {
         $data = array(
             'gid'           => $gid,
             'owner'         => $this->session->userdata('uid'),
+            'name'          => $name,
             'description'   => $desc,
             'startdate'     => $times['startdate'],
             'starttime'     => $times['starttime'],

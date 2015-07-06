@@ -1,0 +1,52 @@
+<?php include( 'header.php' ); ?>
+
+<div class="row">
+    <div class="large-12 columns">
+        <div class="row">
+            <div class="large-8 small-12 columns">
+                <h4>New Event</h4><hr>
+                <?php if( $this->session->userdata('username') ): ?>
+                  <?php echo form_open(""); ?>
+                        <?php echo validation_errors('<p class="error">'); ?>
+                          <input type="text" placeholder="Event Name" name="name" id="name" />
+                          <textarea placeholder="Event Description" name="desc" id="desc" rows="4" /></textarea>
+                          <label>Start Date</label>
+                          <input type="text" placeholder="YYYY-MM-DD" name="startdate" id="startdate" />
+                          <label>Start Time</label>
+                          <input type="text" placeholder="HH:MM" name="starttime" id="starttime" />
+                          <label>End Date</label>
+                          <input type="text" placeholder="YYYY-MM-DD" name="enddate" id="enddate" />
+                          <label>End Time</label>
+                          <input type="text" placeholder="HH:MM" name="endtime" id="endtime" />
+                        <br />
+                        <label>Occurence</label>
+                        <input type="radio" name="occurence" value="0">One-Time<br>
+                        <input type="radio" name="occurence" value="1">Daily<br>
+                        <input type="radio" name="occurence" value="7">Weekly<br />
+                        <input type="radio" name="occurence" value="30">Monthly<br />
+                        <br />
+                        <input class="button secondary" type="submit" value="Post">                                
+                  <?php echo form_close(); ?>
+                <?php else: ?>
+                    <p>You must be a member in order to reply.</p>
+                <?php endif; ?>                
+            </div>
+
+            <div class="large-4 small-12 columns"> 
+                <h4>Forum Rules</h4><hr>
+                <ol>
+                  <li>Don't post red pandas</li>
+                  <li>This is rule number two</li>
+                  <li>The third rule is a good one to follow</li>
+                  <li>Perhaps this rule is too strict</li>
+                  <li>This is nice</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+</div>
+
+<?php include( 'footer.php' ); ?>
+
+</option>
+<option
