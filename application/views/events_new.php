@@ -10,6 +10,8 @@
                         <?php echo validation_errors('<p class="error">'); ?>
                           <input type="text" placeholder="Event Name" name="name" id="name" />
                           <textarea placeholder="Event Description" name="desc" id="desc" rows="4" /></textarea>
+                          <label>Location</label>
+                          <input type="text" placeholder="Location" name="location" id="location" />
                           <label>Start Date</label>
                           <input type="text" placeholder="YYYY-MM-DD" name="startdate" id="startdate" />
                           <label>Start Time</label>

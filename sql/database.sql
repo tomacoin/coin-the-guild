@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2015 at 01:53 AM
+-- Generation Time: Jul 07, 2015 at 06:10 AM
 -- Server version: 5.6.17
 -- PHP Version: 5.5.12
 
@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `events` (
   `owner` int(11) NOT NULL,
   `name` varchar(45) CHARACTER SET latin1 NOT NULL,
   `description` text CHARACTER SET latin1 NOT NULL,
+  `location` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `startdate` date NOT NULL,
   `starttime` time NOT NULL,
   `enddate` date NOT NULL,
@@ -107,7 +108,7 @@ CREATE TABLE IF NOT EXISTS `replies` (
   PRIMARY KEY (`rid`),
   KEY `FK_reply_user` (`poster`),
   KEY `FK_reply_thread` (`tid`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=13 ;
 
 -- --------------------------------------------------------
 
@@ -128,7 +129,7 @@ CREATE TABLE IF NOT EXISTS `threads` (
   KEY `tid` (`tid`),
   KEY `threads_ibfk_2` (`fid`),
   KEY `FK_poster_user` (`poster`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=11 ;
 
 -- --------------------------------------------------------
 

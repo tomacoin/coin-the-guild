@@ -22,6 +22,7 @@ class Events extends CI_Controller {
 			$this->load->library( 'form_validation' );
 			$this->form_validation->set_rules( 'name', 'Name', 'trim|required|min_length[10]' );
 			$this->form_validation->set_rules( 'desc', 'Description', 'trim|required|min_length[10]' );
+			$this->form_validation->set_rules( 'location', 'Location', 'trim' );
 			$this->form_validation->set_rules( 'occurence', 'Occurence', 'trim|required' );
 			$this->form_validation->set_rules( 'startdate', 'Start Date', 'trim|required' );
 			$this->form_validation->set_rules( 'enddate', 'End Date', 'trim|required' );
@@ -35,6 +36,7 @@ class Events extends CI_Controller {
 			{
 				$gid =  1;
 				$name = $this->input->post( 'name' );
+				$location = $this->input->post( 'location' );
 				$desc = $this->input->post( 'desc' );
 				$occurence = $this->input->post( 'occurence' );
 				$times = array(
@@ -43,7 +45,7 @@ class Events extends CI_Controller {
 					"enddate" => $this->input->post( 'enddate' ),
 					"endtime" => $this->input->post( 'endtime' )
 				);
-				$this->em->create_event(  $gid, $name, $desc, $times, $occurence );
+				$this->em->create_event(  $gid, $name, $desc, $location, $times, $occurence );
 				redirect( '/events/' );
 			}
 		}

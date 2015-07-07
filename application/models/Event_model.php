@@ -7,13 +7,14 @@ class Event_model extends CI_Model {
         parent::__construct();
     }
 
-    function create_event ( $gid, $name, $desc, $times, $occurence )
+    function create_event ( $gid, $name, $desc, $location, $times, $occurence )
     {
         $data = array(
             'gid'           => $gid,
             'owner'         => $this->session->userdata('uid'),
             'name'          => $name,
             'description'   => $desc,
+            'location'      => $location,
             'startdate'     => $times['startdate'],
             'starttime'     => $times['starttime'],
             'enddate'       => $times['enddate'],
@@ -23,7 +24,7 @@ class Event_model extends CI_Model {
         $this->db->insert( 'events', $data );
     }
 
-    function edit_event ( $eid, $name, $desc, $times, $occurence )
+    function edit_event ( $eid, $name, $desc, $location, $times, $occurence )
     {
         $data = array(
             'description'   => $desc,

@@ -9,13 +9,31 @@
                             <br />
                             <div class="panel">
                                 <h5><a href="#"><?php echo $event->name ?></a></h5>
-                                <p><?php echo $event->startdate . ' ' . $event->starttime ?> <small>(in 1:34 hours)</small><br />
-                                <?php echo $event->occurence ?> @ Guild Headquarters</p>
+                                <p><?php echo date( 'm/d/y',strtotime($event->startdate) ) . ' ' . date( 'H:i',strtotime($event->starttime) ) ?><br />
+                                <?php
+                                    switch( $event->occurence ) {
+                                        case 0:
+                                            break;
+                                        case 1:
+                                            echo 'Daily';
+                                            break;
+                                        case 7:
+                                            echo 'Weekly ';
+                                            break;
+                                        case 14:
+                                            echo 'Fortnightly ';
+                                            break;
+                                        case 30:
+                                            echo 'Monthly ';
+                                            break;
+                                    }
+                                ?>@ <?php echo $event->location ?></p>
                                 <h6 class="subheader">
                                     <?php echo $event->description ?>
                                 </h6>
                             </div>
                             <?php endforeach; ?>
+                            <!--
                             <div class="panel">
                                 <h5><a href="#">Event Title 1</a></h5>
                                 <p>13/08/2015 4:00PM <small>(in 1:34 hours)</small><br />
@@ -52,6 +70,7 @@
                                     PM Whiskerz for more information.
                                 </h6>
                             </div>
+                            -->
                         </div>
                         <div class="large-4 small-12 columns">
  
