@@ -33,6 +33,15 @@
                                 </h6>
                             </div>
                             <?php endforeach; ?>
+
+                            <?php
+
+                            $m = date("m");
+                            $dw = date( "N", strtotime( "2015-" . $m . "-01" ) );
+                            echo $m;
+                            echo $dw;
+
+                            ?>
                             <!--
                             <div class="panel">
                                 <h5><a href="#">Event Title 1</a></h5>
@@ -86,42 +95,17 @@
                                     <th>F</th>
                                     <th>S</th>
                                 </tr>
-                                <tr>
-                                    <td></td>
-                                    <td></td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>4</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>4</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td>4</td>
-                                    <td>5</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td>4</td>
-                                    <td>1</td>
-                                    <td>2</td>
-                                    <td>3</td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                                <?php
+                                    $day = 1;
+                                    for ($i = 0; $i < 4 ; $i++) { 
+                                        echo '<tr>';
+                                        for ($j = 0; $j < 7 ; $j++) { 
+                                            echo '<td>' . $day . '</td>';
+                                            $day++;
+                                        }
+                                        echo '</tr>';
+                                    }
+                                ?>
 
                             </table>
                         </div>
