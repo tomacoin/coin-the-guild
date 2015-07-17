@@ -51,24 +51,31 @@ class Guild_model extends CI_Model {
 
     }
 
-    function get_members ( $gid ) 
+    function get_members ( $gid, $no_mods = false ) 
     {
-
+        $this->db->where('gid', $gid);
+        $this->db->from('membership');
+        $query = $this->db->get()->result();
+        return $query;
     }
 
     function get_owner ( $gid ) 
     {
+        $this->db->
+            select('owner')->
+            from('guilds')->
+            where('gid', $gid);
 
-    }
-
-    function get_admins ( $gid ) 
-    {
-
+        return $this->db->get()->row()->owner;
     }
 
     function get_moderators ( $gid ) 
     {
-
+        $this->db->where('gid', $gid);        
+        $this->db->where('role', 2);
+        $this->db->from('membership');
+        $query = $this->db->get()->result();
+        return $query;
     }
 
     function is_member ( $gid, $uid ) 
