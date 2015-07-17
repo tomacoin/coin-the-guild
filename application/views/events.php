@@ -33,53 +33,6 @@
                                 </h6>
                             </div>
                             <?php endforeach; ?>
-
-                            <?php
-
-                            $m = date("m");
-                            $dw = date( "N", strtotime( "2015-" . $m . "-01" ) );
-                            echo $m;
-                            echo $dw;
-
-                            ?>
-                            <!--
-                            <div class="panel">
-                                <h5><a href="#">Event Title 1</a></h5>
-                                <p>13/08/2015 4:00PM <small>(in 1:34 hours)</small><br />
-                                Fortnightly @ Guild Headquarters</p>
-                                <h6 class="subheader">
-                                    Join us for a drop party at the guild headquarters every 2 weeks - we will be drawing rune armor, dragon drops, crystals and other rare items.<br /><br />
-                                    PM Whiskerz for more information.
-                                </h6>
-                            </div>
-                            <div class="panel">
-                                <h5><a href="#">Event Title 1</a></h5>
-                                <p>13/08/2015 4:00PM <small>(in 1:34 hours)</small><br />
-                                Fortnightly @ Guild Headquarters</p>
-                                <h6 class="subheader">
-                                    Join us for a drop party at the guild headquarters every 2 weeks - we will be drawing rune armor, dragon drops, crystals and other rare items.<br /><br />
-                                    PM Whiskerz for more information.
-                                </h6>
-                            </div>
-                            <div class="panel">
-                                <h5><a href="#">Event Title 1</a></h5>
-                                <p>13/08/2015 4:00PM <small>(in 1:34 hours)</small><br />
-                                Fortnightly @ Guild Headquarters</p>
-                                <h6 class="subheader">
-                                    Join us for a drop party at the guild headquarters every 2 weeks - we will be drawing rune armor, dragon drops, crystals and other rare items.<br /><br />
-                                    PM Whiskerz for more information.
-                                </h6>
-                            </div>
-                            <div class="panel">
-                                <h5><a href="#">Event Title 1</a></h5>
-                                <p>13/08/2015 4:00PM <small>(in 1:34 hours)</small><br />
-                                Fortnightly @ Guild Headquarters</p>
-                                <h6 class="subheader">
-                                    Join us for a drop party at the guild headquarters every 2 weeks - we will be drawing rune armor, dragon drops, crystals and other rare items.<br /><br />
-                                    PM Whiskerz for more information.
-                                </h6>
-                            </div>
-                            -->
                         </div>
                         <div class="large-4 small-12 columns">
  
@@ -96,14 +49,38 @@
                                     <th>S</th>
                                 </tr>
                                 <?php
+                                    $mstart = date( "N", strtotime( date("Y") . "-" . date("m") . "-01" ) );
                                     $day = 1;
-                                    for ($i = 0; $i < 4 ; $i++) { 
+                                    $days = date("t");
+                                    for ($i = 0; $i < 6 ; $i++) { 
                                         echo '<tr>';
-                                        for ($j = 0; $j < 7 ; $j++) { 
-                                            echo '<td>' . $day . '</td>';
-                                            $day++;
+                                        for ($j = 0; $j < 7 ; $j++) {
+
+                                            if ( $day == 1 && $j == $mstart )
+                                            {
+                                                echo '<td>' . $day . '</td>';
+                                                $day++;
+                                            }
+                                            else if ( $day == 1 && $j < $mstart )
+                                            {
+                                                echo '<td></td>';
+                                            }
+                                            else
+                                            {
+                                                echo '<td>' . $day . '</td>';
+                                                $day++;
+                                            }
+                                            
+                                            if ( $day > $days ) {
+                                                break;
+                                            }
+                                            
+
                                         }
                                         echo '</tr>';
+                                        if ( $day >= $days ) {
+                                                break;
+                                        }
                                     }
                                 ?>
 
