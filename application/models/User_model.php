@@ -69,12 +69,12 @@ class User_model extends CI_Model {
 		$this->db->update('users', array( 'email' => $newemail ) ); 
 	}
 
-	function edit_profile ( &$data ) 
+	function set_profile ( &$data ) 
 	{
 
 	}
 
-	function edit_settings ( &$data ) 
+	function set_settings ( &$data ) 
 	{
 
 	}

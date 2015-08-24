@@ -65,9 +65,10 @@ CREATE TABLE IF NOT EXISTS `guilds` (
 CREATE TABLE IF NOT EXISTS `membership` (
   `gid` int(11) NOT NULL,
   `uid` int(11) NOT NULL,
-  `role` int(11) NOT NULL DEFAULT '0',
-  `display_name` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `avatar_url` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `role` int(11) NOT NULL DEFAULT '3',
+  `motto` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `location` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
   `joined` datetime NOT NULL,
   `quit` datetime NOT NULL,
   KEY `FK_guild_user` (`gid`),
@@ -127,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `email` varchar(254) COLLATE utf8_unicode_ci NOT NULL,
   `avatar_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `joined` datetime NOT NULL,
-  `lastlogin` datetime NOT NULL,
+  `last_on` datetime NOT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
