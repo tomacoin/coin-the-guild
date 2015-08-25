@@ -86,7 +86,11 @@ class User_model extends CI_Model {
 
 	function get_settings ( $uid ) 
 	{
-
+        $this->db->where('users.uid', $uid);
+        $this->db->from('users');
+        $this->db->join('membership', 'membership.uid = users.uid');
+        $query = $this->db->get()->result();
+        return $query[0];
 	}
 
 	function get_username ( $uid ) 

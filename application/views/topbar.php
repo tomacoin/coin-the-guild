@@ -54,7 +54,7 @@
                 <?php if( !$is_member ): ?>
                 <li><?php echo anchor('guild/join', 'Join', array('class' => 'button')); ?></li>
                 <?php endif; ?>
-                <li><a><?php echo $this->session->userdata('username'); ?></a></li>
+                <li><?php echo anchor('user/settings', $this->session->userdata('username') ); ?></li>
                 <li class="divider"></li>
                 <li><?php echo anchor('user/logout', 'Logout'); ?></li>
             </ul>

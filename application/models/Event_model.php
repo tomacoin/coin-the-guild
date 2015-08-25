@@ -51,9 +51,4 @@ class Event_model extends CI_Model {
         $query = $this->db->get()->result();
         return $query;
     }
-
-    function get_event ( $eid )
-    {
-    	return $query = $this->db->where('eid', $eid)->get('events');
-    }
 }

@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `membership` (
   `role` int(11) NOT NULL DEFAULT '3',
   `motto` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `location` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `avatar` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `avatar` int(1) NOT NULL DEFAULT '0',
   `joined` datetime NOT NULL,
   `quit` datetime NOT NULL,
   KEY `FK_guild_user` (`gid`),

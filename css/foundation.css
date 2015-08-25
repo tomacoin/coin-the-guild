@@ -6409,3 +6409,7 @@ fieldset.reply {
 .new-thread {
   float: right;
 }
+
+label {
+  margin-top: 10px;
+}
