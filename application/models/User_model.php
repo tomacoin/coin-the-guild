@@ -9,8 +9,8 @@ class User_model extends CI_Model {
 
     function login( $username, $password )
 	{
-		$this->db->where("username",$username);
-		$this->db->where("password",$password);
+		$this->db->where("username", $username);
+		$this->db->where("password", $password);
 
 		$query=$this->db->get("users");
 		
@@ -26,7 +26,7 @@ class User_model extends CI_Model {
 					'logged_in'  => TRUE,
 				);
 			}
-			$this->session->set_userdata($newdata);
+			$this->session->set_userdata( $newdata );
 			return true;
 		}		
 		return false;
@@ -42,27 +42,6 @@ class User_model extends CI_Model {
 		$this->db->insert( 'users', $data );
 	}
 
-	function change_password ( $uid, $oldpass, $newpass ) 
-	{
-		$this->db->where('uid', $uid);
-		$this->db->where('password', md5( $oldpass ) ); 
-
-		$query = $this->db->get();
-
-		// Check oldpass correct
-		if ($query->num_rows() > 0)
-		{
-			$this->db->where('uid', $uid);
-			$this->db->update('users', array( 'password' => md5( $newpass ) ) ); 
-			return true;
-		}
-		else
-		{
-			return false;
-		}
-
-	}
-
 	function change_email ( $uid, $newemail ) 
 	{
 		$this->db->where('uid', $uid);
@@ -74,23 +53,41 @@ class User_model extends CI_Model {
 
 	}
 
-	function set_settings ( &$data ) 
-	{
-
-	}
-
 	function get_profile ( $uid ) 
 	{
 
 	}
 
-	function get_settings ( $uid ) 
+	function get_settings ( $uid )  
 	{
         $this->db->where('users.uid', $uid);
         $this->db->from('users');
         $this->db->join('membership', 'membership.uid = users.uid');
         $query = $this->db->get()->result();
         return $query[0];
+	}
+
+	function set_settings () 
+	{
+		$uid = $this->session->userdata('uid');
+		$gid = 1;
+        $membership_data = array(
+            'motto'   => $this->input->post( 'motto' ),
+            'location'   => $this->input->post( 'location' )
+        );
+        $this->db->where( 'uid', $uid);
+        $this->db->where( 'gid', $gid);
+        $this->db->update( 'membership', $membership_data );
+
+        $account_data = array(
+            'email'   => $this->input->post( 'email' ),
+        );
+        if( $this->input->post( 'password' ) )
+        {
+        	$account_data['password'] = md5( $this->input->post( 'password' ) );
+        }
+        $this->db->where( 'uid', $uid);
+        $this->db->update( 'users', $account_data );
 	}
 
 	function get_username ( $uid ) 

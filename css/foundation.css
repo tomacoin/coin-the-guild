@@ -6413,3 +6413,7 @@ fieldset.reply {
 label {
   margin-top: 10px;
 }
+
+div.row > div.columns > div.row > div.columns {
+  min-height: 300px;
+}

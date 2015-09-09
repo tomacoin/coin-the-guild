@@ -3,7 +3,6 @@
                 <div class="large-12 columns">
                     <div class="row">
                         <div class="large-8 small-12 columns">
-                            <?php //var_dump( $motto ); ?>
                             <h4>Account Settings</h4><hr>
                             <?php if( $this->session->userdata('username') ): ?>
                               <?php echo form_open(""); ?>
@@ -18,14 +17,15 @@
                                     ?>
                                     <input type="file" name="avatar" size="20" />
                                     <label>Motto</label>
-                                    <input type="text" value="<?php echo $motto; ?>" placeholder="Thread Title" name="motto" id="motto" />
+                                    <input type="text" value="<?php echo $motto; ?>" name="motto" id="motto" />
                                     <label>Location</label>
-                                    <input type="text" value="<?php echo $location; ?>" placeholder="Thread Title" name="location" id="location" />
-                                    <label>Signature</label>
-                                    <textarea name="content" id="content" rows="4"></textarea>
+                                    <input type="text" value="<?php echo $location; ?>" name="location" id="location" />
                                     <label>Email</label>
-                                    <input type="text" value="<?php echo $email; ?>" placeholder="Thread Title" name="email" id="email" />
-                                    
+                                    <input type="text" value="<?php echo $email; ?>" name="email" id="email" />
+                                    <label>Password</label>
+                                    <input type="password" value="" placeholder="New Password" name="password" id="password" />
+                                    <label>Password (Confirm)</label>
+                                    <input type="password" value="" placeholder="Retype New Password" name="password2" id="password2" />
                                     <input class="button secondary" type="submit" value="Save">
                               <?php echo form_close(); ?>
                             <?php else: ?>

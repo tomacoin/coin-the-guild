@@ -70,40 +70,48 @@ class User extends CI_Controller {
 	public function settings()
 	{
 		$config['upload_path'] 		= './uploads/';
-			$config['allowed_types'] 	= 'gif|jpg|png';
-			$config['max_size']			= '2048';
-			$config['max_width']  		= '250';
-			$config['max_height']  		= '250';
+		$config['allowed_types'] 	= 'gif|jpg|png';
+		$config['max_size']			= '2048';
+		$config['max_width']  		= '250';
+		$config['max_height']  		= '250';
 
-			$this->load->library('upload', $config);
+		$this->load->library('upload', $config);
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
 			$this->load->library( 'form_validation' );
 
 			$this->form_validation->set_rules( 'motto', 'Motto', 'trim' );
 			$this->form_validation->set_rules( 'location', 'Location', 'trim' );
+       
+
+
 			$this->form_validation->set_rules( 'email', 'Email', 'trim|required|valid_email' );
-
-			
-
-			if( $this->form_validation->run() == FALSE ||  !$this->upload->do_upload() )
+			$this->form_validation->set_rules( 'password', 'Password', 'trim|min_length[4]|max_length[32]|matches[password2]' );
+			$this->form_validation->set_rules( 'password2', 'Password Confirmation', 'trim' );
+			if( $this->form_validation->run() == FALSE ||  ( $_FILES && $_FILES['field_name']['name'] && !$this->upload->do_upload() ) )
 			{
-
 			}
 			else
 			{
 				$this->user_model->set_settings();
-				$this->settings();
 			}
 		}
 
-		$data = $this->user_model->get_settings( $this->session->userdata('uid') );
-		$this->load->view( 'user', array(
-			'username'	=> $this->session->userdata('username'),
-			'motto'		=> $data->motto,
-			'avatar'	=> $data->avatar,
-			'location'	=> $data->location,
-			'email'		=> $data->email
-		));
+		if( $this->session->userdata('username') )
+		{
+			$data = $this->user_model->get_settings( $this->session->userdata('uid') );
+			$this->load->view( 'user', array(
+				'username'	=> $this->session->userdata('username'),
+				'motto'		=> $data->motto,
+				'avatar'	=> $data->avatar,
+				'location'	=> $data->location,
+				'email'		=> $data->email
+			));
+		}
+		else
+		{
+			$this->load->view( 'user' );
+		}
+
 	}
 }
