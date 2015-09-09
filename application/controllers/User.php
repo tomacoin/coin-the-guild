@@ -69,11 +69,12 @@ class User extends CI_Controller {
 
 	public function settings()
 	{
-		$config['upload_path'] 		= './uploads/';
+		$config['upload_path'] 		= './images/';
 		$config['allowed_types'] 	= 'gif|jpg|png';
 		$config['max_size']			= '2048';
-		$config['max_width']  		= '250';
-		$config['max_height']  		= '250';
+		$config['max_width']  		= '500';
+		$config['max_height']  		= '500';
+		$config['encrypt_name']		= true;
 
 		$this->load->library('upload', $config);
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -88,7 +89,7 @@ class User extends CI_Controller {
 			$this->form_validation->set_rules( 'email', 'Email', 'trim|required|valid_email' );
 			$this->form_validation->set_rules( 'password', 'Password', 'trim|min_length[4]|max_length[32]|matches[password2]' );
 			$this->form_validation->set_rules( 'password2', 'Password Confirmation', 'trim' );
-			if( $this->form_validation->run() == FALSE ||  ( $_FILES && $_FILES['field_name']['name'] && !$this->upload->do_upload() ) )
+			if( $this->form_validation->run() == FALSE ||  ( $_FILES && $_FILES['avatar']['name'] && !$this->upload->do_upload( 'avatar' ) ) )
 			{
 			}
 			else

@@ -5,7 +5,7 @@
                         <div class="large-8 small-12 columns">
                             <h4>Account Settings</h4><hr>
                             <?php if( $this->session->userdata('username') ): ?>
-                              <?php echo form_open(""); ?>
+                              <?php echo form_open_multipart(""); ?>
                                     <?php echo validation_errors('<p class="error">'); ?>
                                     <?php echo $this->upload->display_errors('<p class="error">', '</p>'); ?>
                                     <label>Username</label>

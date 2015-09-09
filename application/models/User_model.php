@@ -70,11 +70,16 @@ class User_model extends CI_Model {
 	function set_settings () 
 	{
 		$uid = $this->session->userdata('uid');
+		$upload = $this->upload->data();
 		$gid = 1;
         $membership_data = array(
             'motto'   => $this->input->post( 'motto' ),
             'location'   => $this->input->post( 'location' )
         );
+        if( $upload )
+        {
+        	$membership_data['avatar'] = $upload['file_name'];
+        }
         $this->db->where( 'uid', $uid);
         $this->db->where( 'gid', $gid);
         $this->db->update( 'membership', $membership_data );
