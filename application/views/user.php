@@ -12,8 +12,8 @@
                                     <?php echo $username; ?>
                                     <label>Profile Image</label>
                                     <?php 
-                                        if( $avatar ) echo "<img class=\"member-card-pic\" src=\"http://placehold.it/200x200&amp;text=Pic\">"; 
-                                        else echo "<img class=\"member-card-pic\" src=\"http://placehold.it/200x200&amp;text=Pic\">";
+                                        if( !$avatar )echo "<img class=\"member-card-pic\" src=\"http://placehold.it/200x200&amp;text=Pic\">"; 
+                                        else echo img("images/$avatar", TRUE, array( 'class' => 'member-card-pic') );
                                     ?>
                                     <input type="file" name="avatar" size="20" />
                                     <label>Motto</label>

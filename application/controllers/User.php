@@ -84,8 +84,6 @@ class User extends CI_Controller {
 			$this->form_validation->set_rules( 'motto', 'Motto', 'trim' );
 			$this->form_validation->set_rules( 'location', 'Location', 'trim' );
        
-
-
 			$this->form_validation->set_rules( 'email', 'Email', 'trim|required|valid_email' );
 			$this->form_validation->set_rules( 'password', 'Password', 'trim|min_length[4]|max_length[32]|matches[password2]' );
 			$this->form_validation->set_rules( 'password2', 'Password Confirmation', 'trim' );

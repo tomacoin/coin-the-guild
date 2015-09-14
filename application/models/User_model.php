@@ -69,6 +69,8 @@ class User_model extends CI_Model {
 
 	function set_settings () 
 	{
+		$this->load->helper('file');
+
 		$uid = $this->session->userdata('uid');
 		$upload = $this->upload->data();
 		$gid = 1;
@@ -78,6 +80,26 @@ class User_model extends CI_Model {
         );
         if( $upload )
         {
+        	$this->load->library('image_lib');
+        	$config['source_image'] = 'images/' . $upload['file_name'];
+        	$config['maintain_ratio'] = TRUE;
+		    $config['width']     = 200;
+		    $config['height']   = 200;
+		    $this->image_lib->initialize($config);
+    		$this->image_lib->resize();
+    		$this->image_lib->clear();
+
+    		$this->db->where('uid', $uid);
+    		$this->db->where('gid', 1 );
+    		$this->db->from('membership');
+    		$query = $this->db->get();
+			if ($query->num_rows() > 0)
+			{
+			   $row = $query->row();
+			   $avatar = $row->avatar;
+			   unlink( 'images/' . $avatar );
+			}
+
         	$membership_data['avatar'] = $upload['file_name'];
         }
         $this->db->where( 'uid', $uid);
