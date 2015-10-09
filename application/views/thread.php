@@ -34,10 +34,10 @@
                                 <tbody>
                                     <tr>
                                         <td>
-                                            <img class="member-card-pic" src="http://placehold.it/100x100&text=Pic">
+                                            <img class="member-card-pic" src="<?php echo base_url( 'images/' . $thread->avatar ) ?>">
                                             <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $thread->username; ?></span>
                                             <br />
-                                            <h7 class="subheader">I am cool</h7>
+                                            <h7 class="subheader"><?php echo $thread->motto; ?></h7>
                                         </td>
                                         <td> 
                                             <h5><?php echo $thread->title; ?></h5>
@@ -48,7 +48,7 @@
                                     <?php foreach( $replies as $reply ): ?>
                                     <tr>
                                         <td>
-                                            <img class="member-card-pic" src="http://placehold.it/100x100&text=Pic">
+                                            <img class="member-card-pic" src="<?php echo base_url( 'images/' . $thread->avatar ) ?>">
                                             <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $reply->username; ?></span>
                                             <br />
                                             <h7 class="subheader">I am cool</h7>

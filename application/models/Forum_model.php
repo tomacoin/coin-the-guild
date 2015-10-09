@@ -122,17 +122,22 @@ class Forum_model extends CI_Model {
 
 	function get_thread ( $tid )
 	{
-		$this->db->select(' 
+		$this->db->select('
 			tid,
 			title, 
 			content, 
 			posted, 
 			edited, 
-			username as \'username\'
-			FROM threads
-			JOIN users ON users.uid = threads.poster 
-			WHERE tid = ' . $tid
-		);
+			avatar,
+			motto,
+			location,
+			username
+		');
+
+		$this->db->from('threads');
+		$this->db->join('users', 'users.uid = threads.poster');
+		$this->db->join('membership', 'users.uid = membership.uid AND membership.gid = 1');
+		$this->db->where( "tid = {$tid}" );
 
 		$query = $this->db->get()->result();
 		return $query[0];
@@ -144,11 +149,16 @@ class Forum_model extends CI_Model {
 			content,
 			posted,
 			edited,
-			username as \'username\'
-			FROM replies
-			JOIN users ON users.uid = replies.poster 
-			WHERE tid = ' . $tid
-		);
+			avatar,
+			motto,
+			location,
+			username
+		');
+
+		$this->db->from('replies');
+		$this->db->join('users', 'users.uid = replies.poster');
+		$this->db->join('membership', 'users.uid = membership.uid AND membership.gid = 1');
+		$this->db->where( "tid = {$tid}" );
 
 		$query = $this->db->get()->result();
 		return $query;
