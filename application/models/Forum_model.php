@@ -93,7 +93,7 @@ class Forum_model extends CI_Model {
 		return $query = $this->db->where('gid', $gid)->get('forums');
 	}
 
-	function get_threads ( $fid )
+	function get_threads ( $fid, $page )
 	{
 		$this->db->select(' 
 			threads.tid,
@@ -115,6 +115,11 @@ class Forum_model extends CI_Model {
 				)
 			WHERE fid = 1'
 		);
+		$this->db->limit( 10 );
+		if( $page )
+		{
+			$this->db->offset( $page * 10 );
+		}
 
 		$query = $this->db->get()->result();
 		return $query;
@@ -143,7 +148,7 @@ class Forum_model extends CI_Model {
 		return $query[0];
 	}
 
-	function get_replies ( $tid )
+	function get_replies ( $tid, $page )
 	{		
 		$this->db->select('
 			content,
@@ -159,7 +164,11 @@ class Forum_model extends CI_Model {
 		$this->db->join('users', 'users.uid = replies.poster');
 		$this->db->join('membership', 'users.uid = membership.uid AND membership.gid = 1');
 		$this->db->where( "tid = {$tid}" );
-
+		$this->db->limit( 10 );
+		if( $page )
+		{
+			$this->db->offset( ( $page - 1 ) * 10 );
+		}
 		$query = $this->db->get()->result();
 		return $query;
 	}

@@ -32,6 +32,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    <?php if( $page == 1 ): ?>
                                     <tr>
                                         <td>
                                             <img class="member-card-pic" src="<?php echo base_url( 'images/' . $thread->avatar ) ?>">
@@ -45,6 +46,7 @@
                                             <p><?php echo $thread->content; ?>
                                         </td>
                                     </tr>
+                                    <?php endif; ?>
                                     <?php foreach( $replies as $reply ): ?>
                                     <tr>
                                         <td>

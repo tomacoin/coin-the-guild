@@ -11,12 +11,14 @@ class Forum extends CI_Controller {
 
 	public function index()
 	{
-		$data = $this->fm->get_threads( 1 );
+		$page = $this->input->get( 'page', TRUE );
+		$data = $this->fm->get_threads( 1, $page );
 		$this->load->view('forum', array ( 'threads' => $data ) );
 	}
 
 	public function thread( $tid )
 	{
+		$page = $this->input->get( 'page', TRUE ) ? $this->input->get( 'page', TRUE ) : 1;
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
 			if ( $tid === "new" ) {
@@ -62,10 +64,9 @@ class Forum extends CI_Controller {
 			return;
 		}
 
-
 		$thread = $this->fm->get_thread( $tid );
-		$replies = $this->fm->get_replies( $tid );
-		$this->load->view( 'thread', array ( 'thread' => $thread, 'replies' => $replies ) );
+		$replies = $this->fm->get_replies( $tid, $page );
+		$this->load->view( 'thread', array ( 'thread' => $thread, 'replies' => $replies, 'page' => $page  ) );
 		
 		
 	}
