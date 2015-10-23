@@ -66,7 +66,8 @@ class Forum extends CI_Controller {
 
 		$thread = $this->fm->get_thread( $tid );
 		$replies = $this->fm->get_replies( $tid, $page );
-		$this->load->view( 'thread', array ( 'thread' => $thread, 'replies' => $replies, 'page' => $page  ) );
+		$count = $this->fm->get_reply_count( $tid );
+		$this->load->view( 'thread', array ( 'thread' => $thread, 'replies' => $replies, 'page' => $page, 'count' => $count ) );
 		
 		
 	}

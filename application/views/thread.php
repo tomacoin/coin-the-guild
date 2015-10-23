@@ -1,21 +1,62 @@
 <?php include( 'header.php' ); ?>
+<?php
+  $pages = ceil( ( $count + 1 ) / 10 );
+  $class = "class=\"current\"";
+?>
             <div class="row">
                 <div class="large-12 columns">
                     <div class="row">
                         <div class="large-12 small-12 columns">
 
                             <h4><?php echo $thread->title; ?></h4><hr>
-                            <ul class="thread pagination">
-                              <li class="arrow unavailable"><a href="">&laquo;</a></li>
-                              <li class="current"><a href="">1</a></li>
-                              <li><a href="">2</a></li>
-                              <li><a href="">3</a></li>
-                              <li><a href="">4</a></li>
-                              <li class="unavailable"><a href="">&hellip;</a></li>
-                              <li><a href="">12</a></li>
-                              <li><a href="">13</a></li>
-                              <li class="arrow"><a href="">&raquo;</a></li>
+                            <!-- THREAD PAGINATION -->
+                            <ul class="thread pagination">                                
+                                <?php if( $page > 1 ): ?>
+                                    <li class="arrow"><a href="?page=<?php echo $page - 1; ?>">&laquo;</a></li>
+                                <?php else: ?>
+                                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+                                <?php endif; ?>
+
+                                <?php if( $pages < 8 ): ?>
+                                    <?php for( $p = 1; $p <= $pages; $p++ ): ?>
+                                        <li <?php echo ( $page == $p ) ? $class : "" ?>><a href="?page=<?php echo $p?>"><?php echo $p ?></a></li>
+                                    <?php endfor; ?>
+                                <?php else: ?>
+                                    <?php if( $page < 5 ): ?>
+                                        <li <?php echo ( $page == 1 ) ? $class : "" ?>><a href="?page=1">1</a></li>
+                                        <li <?php echo ( $page == 2 ) ? $class : "" ?>><a href="?page=2">2</a></li>
+                                        <li <?php echo ( $page == 3 ) ? $class : "" ?>><a href="?page=3">3</a></li>
+                                        <li <?php echo ( $page == 4 ) ? $class : "" ?>><a href="?page=4">4</a></li>
+                                        <li class="unavailable"><a href="">&hellip;</a></li>
+                                        <li><a href="?page=<?php echo $pages - 1?>"><?php echo $pages - 1?></a></li>
+                                        <li><a href="?page=<?php echo $pages ?>"><?php echo $pages?></a></li>
+                                    <?php elseif( $page > ( $pages - 4 ) ): ?>
+                                        <li <?php echo ( $page == 1 ) ? $class : "" ?>><a href="?page=1">1</a></li>
+                                        <li <?php echo ( $page == 2 ) ? $class : "" ?>><a href="?page=2">2</a></li>
+                                        <li class="unavailable"><a href="">&hellip;</a></li>
+                                        <li><a href="?page=<?php echo $pages - 3?>"><?php echo $pages - 3?></a></li>
+                                        <li><a href="?page=<?php echo $pages - 2?>"><?php echo $pages - 2?></a></li>
+                                        <li><a href="?page=<?php echo $pages - 1?>"><?php echo $pages - 1?></a></li>
+                                        <li><a href="?page=<?php echo $pages ?>"><?php echo $pages?></a></li>
+                                    <?php else: ?>
+                                        <li <?php echo ( $page == 1 ) ? $class : "" ?>><a href="?page=1">1</a></li>
+                                        <li <?php echo ( $page == 2 ) ? $class : "" ?>><a href="?page=2">2</a></li>
+                                        <li class="unavailable"><a href="">&hellip;</a></li>
+                                        <li><a href="?page=<?php echo $page - 1?>"><?php echo $page - 1?></a></li>
+                                        <li class="current"><a href="?page=<?php echo $page?>"><?php echo $page?></a></li>
+                                        <li><a href="?page=<?php echo $page + 1?>"><?php echo $page + 1?></a></li>
+                                        <li class="unavailable"><a href="">&hellip;</a></li>
+                                        <li><a href="?page=<?php echo $pages - 1?>"><?php echo $pages - 1?></a></li>
+                                        <li><a href="?page=<?php echo $pages ?>"><?php echo $pages?></a></li>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                                <?php if( $page < $pages ): ?>
+                                    <li class="arrow"><a href="?page=<?php echo $page + 1; ?>">&raquo;</a></li>
+                                <?php else: ?>
+                                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+                                <?php endif; ?>
                             </ul>
+                            <!-- END THREAD PAGINATION -->
                             <!--
                             <ul class="breadcrumbs">
                               <li><a href="#">Home</a></li>
@@ -65,17 +106,54 @@
                                 </tbody>
                             </table>
 
-                            <ul class="thread pagination">
-                              <li class="arrow unavailable"><a href="">&laquo;</a></li>
-                              <li class="current"><a href="">1</a></li>
-                              <li><a href="">2</a></li>
-                              <li><a href="">3</a></li>
-                              <li><a href="">4</a></li>
-                              <li class="unavailable"><a href="">&hellip;</a></li>
-                              <li><a href="">12</a></li>
-                              <li><a href="">13</a></li>
-                              <li class="arrow"><a href="">&raquo;</a></li>
+                            <!-- THREAD PAGINATION -->
+                            <ul class="thread pagination">                                
+                                <?php if( $page > 1 ): ?>
+                                    <li class="arrow"><a href="?page=<?php echo $page - 1; ?>">&laquo;</a></li>
+                                <?php else: ?>
+                                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+                                <?php endif; ?>
+
+                                <?php if( $pages < 8 ): ?>
+                                    <?php for( $p = 1; $p <= $pages; $p++ ): ?>
+                                        <li <?php echo ( $page == $p ) ? $class : "" ?>><a href="?page=<?php echo $p?>"><?php echo $p ?></a></li>
+                                    <?php endfor; ?>
+                                <?php else: ?>
+                                    <?php if( $page < 5 ): ?>
+                                        <li <?php echo ( $page == 1 ) ? $class : "" ?>><a href="?page=1">1</a></li>
+                                        <li <?php echo ( $page == 2 ) ? $class : "" ?>><a href="?page=2">2</a></li>
+                                        <li <?php echo ( $page == 3 ) ? $class : "" ?>><a href="?page=3">3</a></li>
+                                        <li <?php echo ( $page == 4 ) ? $class : "" ?>><a href="?page=4">4</a></li>
+                                        <li class="unavailable"><a href="">&hellip;</a></li>
+                                        <li><a href="?page=<?php echo $pages - 1?>"><?php echo $pages - 1?></a></li>
+                                        <li><a href="?page=<?php echo $pages ?>"><?php echo $pages?></a></li>
+                                    <?php elseif( $page > ( $pages - 4 ) ): ?>
+                                        <li <?php echo ( $page == 1 ) ? $class : "" ?>><a href="?page=1">1</a></li>
+                                        <li <?php echo ( $page == 2 ) ? $class : "" ?>><a href="?page=2">2</a></li>
+                                        <li class="unavailable"><a href="">&hellip;</a></li>
+                                        <li><a href="?page=<?php echo $pages - 3?>"><?php echo $pages - 3?></a></li>
+                                        <li><a href="?page=<?php echo $pages - 2?>"><?php echo $pages - 2?></a></li>
+                                        <li><a href="?page=<?php echo $pages - 1?>"><?php echo $pages - 1?></a></li>
+                                        <li><a href="?page=<?php echo $pages ?>"><?php echo $pages?></a></li>
+                                    <?php else: ?>
+                                        <li <?php echo ( $page == 1 ) ? $class : "" ?>><a href="?page=1">1</a></li>
+                                        <li <?php echo ( $page == 2 ) ? $class : "" ?>><a href="?page=2">2</a></li>
+                                        <li class="unavailable"><a href="">&hellip;</a></li>
+                                        <li><a href="?page=<?php echo $page - 1?>"><?php echo $page - 1?></a></li>
+                                        <li class="current"><a href="?page=<?php echo $page?>"><?php echo $page?></a></li>
+                                        <li><a href="?page=<?php echo $page + 1?>"><?php echo $page + 1?></a></li>
+                                        <li class="unavailable"><a href="">&hellip;</a></li>
+                                        <li><a href="?page=<?php echo $pages - 1?>"><?php echo $pages - 1?></a></li>
+                                        <li><a href="?page=<?php echo $pages ?>"><?php echo $pages?></a></li>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                                <?php if( $page < $pages ): ?>
+                                    <li class="arrow"><a href="?page=<?php echo $page + 1; ?>">&raquo;</a></li>
+                                <?php else: ?>
+                                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+                                <?php endif; ?>
                             </ul>
+                            <!-- END THREAD PAGINATION -->
                             <fieldset class="reply">
                             <legend>Post Reply</legend>
                             <?php if( $this->session->userdata('username') ): ?>

@@ -6383,12 +6383,10 @@ body {
 
 .pagination.thread {
   float: right;
-  width: 330px;
 }
 
 .pagination.forum {
   margin: auto;
-  width: 330px;
 }
 
 .top-poster {

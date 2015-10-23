@@ -90,7 +90,7 @@ class Forum_model extends CI_Model {
 
 	function get_forums ( $gid )
 	{
-		return $query = $this->db->where('gid', $gid)->get('forums');
+		return $result = $this->db->where('gid', $gid)->get('forums');
 	}
 
 	function get_threads ( $fid, $page )
@@ -121,8 +121,8 @@ class Forum_model extends CI_Model {
 			$this->db->offset( $page * 10 );
 		}
 
-		$query = $this->db->get()->result();
-		return $query;
+		$result = $this->db->get()->result();
+		return $result;
 	}
 
 	function get_thread ( $tid )
@@ -144,8 +144,8 @@ class Forum_model extends CI_Model {
 		$this->db->join('membership', 'users.uid = membership.uid AND membership.gid = 1');
 		$this->db->where( "tid = {$tid}" );
 
-		$query = $this->db->get()->result();
-		return $query[0];
+		$result = $this->db->get()->result();
+		return $result[0];
 	}
 
 	function get_replies ( $tid, $page )
@@ -164,12 +164,29 @@ class Forum_model extends CI_Model {
 		$this->db->join('users', 'users.uid = replies.poster');
 		$this->db->join('membership', 'users.uid = membership.uid AND membership.gid = 1');
 		$this->db->where( "tid = {$tid}" );
-		$this->db->limit( 10 );
+		if( $page > 1 )
+		{
+			$this->db->limit( 10 );
+		}
+		else
+		{
+			$this->db->limit( 9 );
+		}
 		if( $page )
 		{
 			$this->db->offset( ( $page - 1 ) * 10 );
 		}
-		$query = $this->db->get()->result();
-		return $query;
+		$result = $this->db->get()->result();
+		return $result;
+	}
+
+	function get_reply_count ( $tid )
+	{
+		$this->db->select('COUNT(*) as count');
+		$this->db->from( 'replies');
+		$this->db->where( "tid = {$tid}" );
+		$result = $this->db->get()->result();
+
+		return $result[0]->count;
 	}
 }
