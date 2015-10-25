@@ -35,14 +35,16 @@ class Forum_model extends CI_Model {
 
 	function create_thread ( $fid, $title, $content )
 	{
+		$uid = $this->session->userdata('uid');
 		$data = array(
 			'fid' 		=> $fid,
 			'title' 	=> $title,
-			'poster' 	=> $this->session->userdata('uid'),
+			'poster' 	=> $uid,
 			'posted' 	=> date('Y-m-d H:i:s'),
 			'content' 	=> $content
 		);
 		$this->db->insert( 'threads', $data );
+		increment_posts( 1, $uid );
 	}
 
 	function edit_thread ( $tid, $title, $content )
@@ -71,6 +73,7 @@ class Forum_model extends CI_Model {
 			'posted' 	=> date('Y-m-d H:i:s')
 		);
 		$this->db->insert( 'replies', $data );
+		increment_posts( 1, $uid );
 	}
 
 	function edit_reply ( $rid, $content )
@@ -118,9 +121,8 @@ class Forum_model extends CI_Model {
 		$this->db->limit( 10 );
 		if( $page )
 		{
-			$this->db->offset( $page * 10 );
+			$this->db->offset( ( $page - 1 ) * 2 );
 		}
-
 		$result = $this->db->get()->result();
 		return $result;
 	}
@@ -188,5 +190,69 @@ class Forum_model extends CI_Model {
 		$result = $this->db->get()->result();
 
 		return $result[0]->count;
+	}
+
+	function get_thread_count ( $fid )
+	{
+		$this->db->select('COUNT(*) as count');
+		$this->db->from( 'threads');
+		$this->db->where( "fid = {$fid}" );
+		$result = $this->db->get()->result();
+
+		return $result[0]->count;
+	}
+
+	function get_top_posters( $gid )
+	{
+		$this->db->select('
+			username,
+			posts,
+			avatar
+		');
+
+		$this->db->from('membership');
+		$this->db->join('users', 'users.uid = membership.uid');
+		$this->db->where( 'gid', $gid );
+		$this->db->order_by( 'posts', 'desc' );
+		$this->db->limit( 5 );
+
+		$result = $this->db->get()->result();
+		return $result;
+	}
+
+	function get_top_threads( $gid )
+	{
+		$this->db->select('
+			COUNT(*) as count,
+			title
+		');
+
+		$this->db->from('replies');
+		$this->db->join('threads', 'threads.tid = replies.tid');
+		$this->db->join('forums', 'forums.fid = threads.fid');
+		$this->db->where( 'gid', $gid );
+		$this->db->order_by( 'count', 'desc' );
+		$this->db->group_by( 'threads.tid');
+		$this->db->limit( 5 );
+
+		$result = $this->db->get()->result();
+		return $result;
+	}
+
+	function increment_pots( $gid, $uid )
+	{
+		$this->db->select('posts');
+		$this->db->from( 'membership');
+		$this->db->where('gid', $gid);
+		$this->db->where('uid', $uid);
+		$result = $this->db->get()->result();
+		$user_posts = $result[0]->count;
+
+		$data = array(
+			'posts' => $user_posts + 1
+		);
+		$this->db->where('gid', $gid);
+		$this->db->where('uid', $uid);
+		$this->db->update( 'membership', $data );
 	}
 }

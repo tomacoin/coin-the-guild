@@ -1,4 +1,9 @@
 <?php include( 'header.php' ); ?>
+<?php
+    $pages = ceil( ( $count + 1 ) / 10 );
+    $class = "class=\"current\"";  
+    $forum_url = base_url( 'forum' );
+?>
             <div class="row">
                 <div class="large-12 columns">
                     <div class="row">
@@ -19,7 +24,7 @@
                                 <?php foreach( $threads as $thread ): ?>
                                     <tr>
                                         <td>
-                                            <h5><a href="forum/thread/<?php echo $thread->tid; ?>"><?php echo $thread->thread_title; ?></a></h5>
+                                            <h5><a href="<?php echo $forum_url . '/thread/' . $thread->tid; ?>"><?php echo $thread->thread_title; ?></a></h5>
                                             <h6 class="subheader">
                                                 Posted by 
                                                 <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $thread->thread_poster; ?></span> at <?php echo $thread->thread_time; ?>
@@ -34,41 +39,67 @@
                                 </tbody>
                             </table>
 
-                            <ul class="forum pagination">
-                              <li class="arrow unavailable"><a href="">&laquo;</a></li>
-                              <li class="current"><a href="">1</a></li>
-                              <li><a href="">2</a></li>
-                              <li><a href="">3</a></li>
-                              <li><a href="">4</a></li>
-                              <li class="unavailable"><a href="">&hellip;</a></li>
-                              <li><a href="">12</a></li>
-                              <li><a href="">13</a></li>
-                              <li class="arrow"><a href="">&raquo;</a></li>
+                            <!-- THREAD PAGINATION -->
+                            <ul class="forum pagination">                                
+                                <?php if( $page > 1 ): ?>
+                                    <li class="arrow"><a href="<?php echo $forum_url ?>/page/<?php echo $page - 1; ?>">&laquo;</a></li>
+                                <?php else: ?>
+                                    <li class="arrow unavailable"><a href="">&laquo;</a></li>
+                                <?php endif; ?>
+
+                                <?php if( $pages < 8 ): ?>
+                                    <?php for( $p = 1; $p <= $pages; $p++ ): ?>
+                                        <li <?php echo ( $page == $p ) ? $class : "" ?>><a href="<?php echo $forum_url ?>/page/<?php echo $p?>"><?php echo $p ?></a></li>
+                                    <?php endfor; ?>
+                                <?php else: ?>
+                                    <?php if( $page < 5 ): ?>
+                                        <li <?php echo ( $page == 1 ) ? $class : "" ?>><a href="<?php echo $forum_url ?>/page/1">1</a></li>
+                                        <li <?php echo ( $page == 2 ) ? $class : "" ?>><a href="<?php echo $forum_url ?>/page/2">2</a></li>
+                                        <li <?php echo ( $page == 3 ) ? $class : "" ?>><a href="<?php echo $forum_url ?>/page/3">3</a></li>
+                                        <li <?php echo ( $page == 4 ) ? $class : "" ?>><a href="<?php echo $forum_url ?>/page/4">4</a></li>
+                                        <li class="unavailable"><a href="">&hellip;</a></li>
+                                        <li><a href="<?php echo $forum_url ?>/page/<?php echo $pages - 1?>"><?php echo $pages - 1?></a></li>
+                                        <li><a href="<?php echo $forum_url ?>/page/<?php echo $pages ?>"><?php echo $pages?></a></li>
+                                    <?php elseif( $page > ( $pages - 4 ) ): ?>
+                                        <li <?php echo ( $page == 1 ) ? $class : "" ?>><a href="<?php echo $forum_url ?>/page/1">1</a></li>
+                                        <li <?php echo ( $page == 2 ) ? $class : "" ?>><a href="<?php echo $forum_url ?>/page/2">2</a></li>
+                                        <li class="unavailable"><a href="">&hellip;</a></li>
+                                        <li><a href="<?php echo $forum_url ?>/page/<?php echo $pages - 3?>"><?php echo $pages - 3?></a></li>
+                                        <li><a href="<?php echo $forum_url ?>/page/<?php echo $pages - 2?>"><?php echo $pages - 2?></a></li>
+                                        <li><a href="<?php echo $forum_url ?>/page/<?php echo $pages - 1?>"><?php echo $pages - 1?></a></li>
+                                        <li><a href="<?php echo $forum_url ?>/page/<?php echo $pages ?>"><?php echo $pages?></a></li>
+                                    <?php else: ?>
+                                        <li <?php echo ( $page == 1 ) ? $class : "" ?>><a href="<?php echo $forum_url ?>/page/1">1</a></li>
+                                        <li <?php echo ( $page == 2 ) ? $class : "" ?>><a href="<?php echo $forum_url ?>/page/2">2</a></li>
+                                        <li class="unavailable"><a href="">&hellip;</a></li>
+                                        <li><a href="<?php echo $forum_url ?>/page/<?php echo $page - 1?>"><?php echo $page - 1?></a></li>
+                                        <li class="current"><a href="<?php echo $forum_url ?>/page/<?php echo $page?>"><?php echo $page?></a></li>
+                                        <li><a href="<?php echo $forum_url ?>/page/<?php echo $page + 1?>"><?php echo $page + 1?></a></li>
+                                        <li class="unavailable"><a href="">&hellip;</a></li>
+                                        <li><a href="<?php echo $forum_url ?>/page/<?php echo $pages - 1?>"><?php echo $pages - 1?></a></li>
+                                        <li><a href="<?php echo $forum_url ?>/page/<?php echo $pages ?>"><?php echo $pages?></a></li>
+                                    <?php endif; ?>
+                                <?php endif; ?>
+                                <?php if( $page < $pages ): ?>
+                                    <li class="arrow"><a href="<?php echo $forum_url ?>/page/<?php echo $page + 1; ?>">&raquo;</a></li>
+                                <?php else: ?>
+                                    <li class="arrow unavailable"><a href="">&raquo;</a></li>
+                                <?php endif; ?>
                             </ul>
+                            <!-- END THREAD PAGINATION -->
                         </div>
                         <div class="large-4 small-12 columns"> 
                             <h4>Top Posters</h4><hr>
-                            <img src="http://placehold.it/50x50&text=P1" class="top-poster">
-                            <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">BanishYou56</span><br />
-                            <h6 class="subheader">156 posts</h6>
-
-                            <img src="http://placehold.it/50x50&text=P1" class="top-poster">
-                            <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">BanishYou56</span><br />
-                            <h6 class="subheader">120 posts</h6>
-
-                            <img src="http://placehold.it/50x50&text=P1" class="top-poster">
-                            <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">BanishYou56</span><br />
-                            <h6 class="subheader">80 posts</h6>
-
-                            <img src="http://placehold.it/50x50&text=P1" class="top-poster">
-                            <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!">BanishYou56</span><br />
-                            <h6 class="subheader">78 posts</h6>
+                            <?php foreach( $top_posters as $top_poster ): ?>
+                            <img src="<?php echo base_url( 'images/' . $top_poster->avatar ) ?>" class="top-poster">
+                            <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $top_poster->username; ?></span><br />
+                            <h6 class="subheader"><?php echo $top_poster->posts; ?> posts</h6>
+                            <?php endforeach; ?>
                             <br />
                             <h4>Top Threads</h4><hr> 
-                            <h5><a href="#">[GUIDE] Get all achievements on Sunspark Island </a><small>136 Posts</small></h5>
-                            <h5><a href="#">[GUIDE] Get all achievements on Sunspark Island </a><small>106 Posts</small></h5>
-                            <h5><a href="#">[GUIDE] Get all achievements on Sunspark Island </a><small>86 Posts</small></h5>
-                            <h6 class="subheader"></h6
+                            <?php foreach( $top_threads as $top_thread ): ?>
+                            <h5><a href="#"><?php echo $top_thread->title; ?> </a><small><?php echo $top_thread->count; ?> Posts</small></h5>
+                            <?php endforeach; ?>
                         </div>
                     </div>
                 </div>

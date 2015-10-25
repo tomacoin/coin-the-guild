@@ -11,14 +11,46 @@ class Forum extends CI_Controller {
 
 	public function index()
 	{
-		$page = $this->input->get( 'page', TRUE );
+		$page = 1;
 		$data = $this->fm->get_threads( 1, $page );
-		$this->load->view('forum', array ( 'threads' => $data ) );
+		$count = $this->fm->get_thread_count( 1 );
+		$top_posters = $this->fm->get_top_posters( 1 );
+		$top_threads = $this->fm->get_top_threads( 1 );
+		$this->load->view('forum', array ( 
+			'threads' => $data, 
+			'page' => $page, 
+			'count' => $count,
+			'top_posters' => $top_posters,
+			'top_threads' => $top_threads
+			 ) );
 	}
 
-	public function thread( $tid )
+	public function page( $page )
 	{
-		$page = $this->input->get( 'page', TRUE ) ? $this->input->get( 'page', TRUE ) : 1;
+		if ( !$page || !is_numeric( $page ) )
+		{
+			$page = 1;
+		}
+		$data = $this->fm->get_threads( 1, $page );
+		$count = $this->fm->get_thread_count( 1 );
+		$top_posters = $this->fm->get_top_posters( 1 );
+		$top_threads = $this->fm->get_top_threads( 1 );
+		$this->load->view('forum', array ( 
+			'threads' => $data, 
+			'page' => $page, 
+			'count' => $count,
+			'top_posters' => $top_posters,
+			'top_threads' => $top_threads
+			 ) );
+	}
+
+	public function thread( $tid, $page = 'page-1' )
+	{
+		$page = substr( $page, 5 );
+		if ( !$page || !is_numeric( $page ) )
+		{
+			$page = 1;
+		}
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
 			if ( $tid === "new" ) {
