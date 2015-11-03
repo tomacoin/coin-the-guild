@@ -5,6 +5,19 @@
                         <div class="large-8 small-12 columns">
 
                             <h4>Welcome to Guild Name</h4><hr>
+
+                            <?php foreach( $blogs as $blog ): ?>
+                            <article>
+                                <h3><a href="#"><?php echo $blog->title ?></a></h3>
+                                <h6>Written by <a href="#"><?php echo $blog->username ?></a> on <?php echo $blog->posted ?></h6>
+                                <?php echo $blog->content ?>
+                                <p><a href="">3 Replies</a></p>
+
+                            </article>
+
+
+
+                            <?php endforeach; ?>
                             <article>
                              
                                 <h3><a href="#">Blog Post Title</a></h3>
