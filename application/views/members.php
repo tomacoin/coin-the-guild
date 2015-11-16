@@ -18,11 +18,11 @@
                                         break;
                                 }
                             ?>
-                            <div class="panel member-card large-2">
-                                <?php if( !$member->avatar_url ): ?>
+                            <div class="panel member-card large-2 medium-3 small-4">
+                                <?php if( !$member->avatar ): ?>
                                     <img class="member-card-pic" src="http://placehold.it/150x150&text=Pic">
                                 <?php else: ?>
-                                    <img class="member-card-pic" src="<?php echo $member->avatar_url ?>">
+                                    <img class="member-card-pic" src="<?php echo base_url( 'images/' . $member->avatar ) ?>">
                                 <?php endif; ?>
                                 
                                 <h5><a href="#" class="<?php echo $role ?>"><?php echo $member->username ?></a></h5>

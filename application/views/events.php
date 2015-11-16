@@ -5,8 +5,8 @@
                         <div class="large-8 small-12 columns">
 
                             <h4>Events<?php echo anchor('events/create', 'New Event', array('class' => 'text-right small button secondary new-thread')); ?></h4>
-                            <?php foreach( $events as $event ): ?>
                             <br />
+                            <?php foreach( $events as $event ): ?>
                             <div class="panel">
                                 <h5><a href="#"><?php echo $event->name ?></a></h5>
                                 <p><?php echo date( 'm/d/y',strtotime($event->startdate) ) . ' ' . date( 'H:i',strtotime($event->starttime) ) ?><br />

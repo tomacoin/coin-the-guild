@@ -53,7 +53,7 @@ class Guild_model extends CI_Model {
 
     function get_members ( $gid ) 
     {
-        $this->db->select('users.uid, users.username, users.last_on, users.avatar_url, membership.joined, membership.role');
+        $this->db->select('users.uid, users.username, users.last_on, users.avatar_url, membership.avatar, membership.joined, membership.role');
         $this->db->where('gid', $gid);
         $this->db->from('membership');
         $this->db->join('users', 'users.uid = membership.uid');

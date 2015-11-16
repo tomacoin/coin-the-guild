@@ -239,7 +239,7 @@ class Forum_model extends CI_Model {
 		return $result;
 	}
 
-	function increment_pots( $gid, $uid )
+	function increment_post( $gid, $uid )
 	{
 		$this->db->select('posts');
 		$this->db->from( 'membership');
