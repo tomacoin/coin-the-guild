@@ -68,6 +68,7 @@ class Forum extends CI_Controller {
 					$title =  $this->input->post( 'title' );
 					$content =  $this->input->post( 'content' ); 
 					$this->fm->create_thread( 1, $title, $content );
+					$this->fm->increment_posts( 1, $this->session->userdata('uid') );
 					redirect( '/forum/' );
 				}
 			}
@@ -87,6 +88,7 @@ class Forum extends CI_Controller {
 					$tid =  $this->input->post( 'thread' );
 					$content =  $this->input->post( 'reply' ); 
 					$this->fm->create_reply( $tid, $content );
+					$this->fm->increment_posts( 1, $this->session->userdata('uid') );
 				}
 			}
 		}

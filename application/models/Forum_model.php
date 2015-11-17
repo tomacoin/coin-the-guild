@@ -35,16 +35,15 @@ class Forum_model extends CI_Model {
 
 	function create_thread ( $fid, $title, $content )
 	{
-		$uid = $this->session->userdata('uid');
+		$this->load->library('typography');
 		$data = array(
 			'fid' 		=> $fid,
 			'title' 	=> $title,
-			'poster' 	=> $uid,
+			'poster' 	=> $this->session->userdata('uid'),
 			'posted' 	=> date('Y-m-d H:i:s'),
-			'content' 	=> $content
+			'content' 	=> $this->typography->auto_typography($content)
 		);
 		$this->db->insert( 'threads', $data );
-		increment_posts( 1, $uid );
 	}
 
 	function edit_thread ( $tid, $title, $content )
@@ -68,12 +67,11 @@ class Forum_model extends CI_Model {
 	{
 		$data = array(
 			'tid' => $tid,
-			'content' => $content,
+			'content' => $this->typography->auto_typography($content),
 			'poster' 	=> $this->session->userdata('uid'),
 			'posted' 	=> date('Y-m-d H:i:s')
 		);
 		$this->db->insert( 'replies', $data );
-		increment_posts( 1, $uid );
 	}
 
 	function edit_reply ( $rid, $content )
@@ -239,7 +237,7 @@ class Forum_model extends CI_Model {
 		return $result;
 	}
 
-	function increment_post( $gid, $uid )
+	function increment_posts( $gid, $uid )
 	{
 		$this->db->select('posts');
 		$this->db->from( 'membership');
