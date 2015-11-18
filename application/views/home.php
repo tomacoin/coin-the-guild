@@ -11,7 +11,7 @@
                                 <h3><a href="#"><?php echo $blog->title ?></a></h3>
                                 <h6>Written by <a href="#"><?php echo $blog->username ?></a> on <?php echo $blog->posted ?></h6>
                                 <?php echo $blog->content ?>
-                                <p><a href="">3 Replies</a></p>
+                                <p><a href=""><?php echo $blog->replies . ( $blog->replies == 1 ? ' Reply' : ' Replies' ) ?></a></p>
 
                             </article>
 

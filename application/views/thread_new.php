@@ -8,9 +8,9 @@
                 <?php if( $this->session->userdata('username') ): ?>
                   <?php echo form_open(""); ?>
                         <?php echo validation_errors('<p class="error">'); ?>
-                          <input type="text" placeholder="Thread Title" name="title" id="title" />
+                          <input type="text" placeholder="Thread Title" name="title" id="title" value="<?php echo ( isset( $title ) ? $title : '' ) ?>"/>
                         
-                        <textarea name="content" id="content" rows="12"></textarea>
+                        <textarea name="content" id="content" rows="12"><?php echo ( isset( $content ) ? $content : '' ) ?></textarea>
                         <input class="button secondary" type="submit" value="Post">                                
                   <?php echo form_close(); ?>
                 <?php else: ?>

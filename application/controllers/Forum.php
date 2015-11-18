@@ -46,6 +46,8 @@ class Forum extends CI_Controller {
 
 	public function thread( $tid, $page = 'page-1' )
 	{
+		$this->load->library( 'form_validation' );
+		$this->load->library( 'form_validation' );
 		$page = substr( $page, 5 );
 		if ( !$page || !is_numeric( $page ) )
 		{
@@ -54,13 +56,15 @@ class Forum extends CI_Controller {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
 			if ( $tid === "new" ) {
-				$this->load->library( 'form_validation' );
 				$this->form_validation->set_rules( 'title', 'Title', 'trim|required|min_length[10]' );
 				$this->form_validation->set_rules( 'content', 'Post', 'trim|required|min_length[10]' );
 
 				if($this->form_validation->run() == FALSE)
 				{
-					$this->load->view( 'thread_new' );
+					$this->load->view( 'thread_new', array( 
+							'title' =>  $this->input->post( 'title' ),
+							'content' =>  $this->input->post( 'content' )
+					));
 					return;
 				}
 				else
@@ -74,9 +78,7 @@ class Forum extends CI_Controller {
 			}
 			else
 			{
-				$tid =  $this->input->post( 'thread' );
-
-				$this->load->library( 'form_validation' );
+				$tid = $this->input->post( 'thread' );
 				$this->form_validation->set_rules( 'reply', 'Reply', 'trim|required|min_length[10]' );
 
 				if($this->form_validation->run() == FALSE)

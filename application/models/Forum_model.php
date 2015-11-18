@@ -5,6 +5,7 @@ class Forum_model extends CI_Model {
     function __construct()
     {
         parent::__construct();
+		$this->load->library('typography');
     }
 
 	function create_forum ( $gid, $name, $desc )
@@ -35,7 +36,6 @@ class Forum_model extends CI_Model {
 
 	function create_thread ( $fid, $title, $content )
 	{
-		$this->load->library('typography');
 		$data = array(
 			'fid' 		=> $fid,
 			'title' 	=> $title,
@@ -114,7 +114,8 @@ class Forum_model extends CI_Model {
 				(
 				SELECT poster FROM replies WHERE replies.tid = threads.tid ORDER BY replies.posted DESC LIMIT 1
 				)
-			WHERE fid = 1'
+			WHERE fid = 1
+			ORDER BY thread_time DESC'
 		);
 		$this->db->limit( 10 );
 		if( $page )
@@ -244,7 +245,8 @@ class Forum_model extends CI_Model {
 		$this->db->where('gid', $gid);
 		$this->db->where('uid', $uid);
 		$result = $this->db->get()->result();
-		$user_posts = $result[0]->count;
+		echo $this->db->last_query();
+		$user_posts = $result[0]->posts;
 
 		$data = array(
 			'posts' => $user_posts + 1
