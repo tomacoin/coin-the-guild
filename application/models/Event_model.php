@@ -44,10 +44,16 @@ class Event_model extends CI_Model {
         $this->db->delete( 'events' );
     }
 
-    function get_events ( $gid )
+    function get_events ( $gid, $limit = NULL )
     {
         $this->db->where('gid', $gid);
         $this->db->from('events');
+        $this->db->order_by('occurence', 'asc'); 
+        $this->db->order_by('startdate', 'asc'); 
+        if( $limit )
+        {
+            $this->db->limit( $limit );
+        }
         $query = $this->db->get()->result();
         return $query;
     }

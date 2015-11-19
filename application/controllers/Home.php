@@ -8,6 +8,7 @@ class Home extends CI_Controller {
 		parent::__construct();
 		$this->load->model('home_model');
 		$this->load->model('forum_model');
+		$this->load->model('event_model');
 	}
 
 	public function index()
@@ -17,7 +18,7 @@ class Home extends CI_Controller {
 		{
 			$blog->replies = $this->forum_model->get_reply_count( $blog->tid );
 		}
-		$events = array();
+		$events = $this->event_model->get_events( 1, 3);
 		$activities = array();
 		$this->load->view( 'home', array( 
 			'blogs' => $blogs, 

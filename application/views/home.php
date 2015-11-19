@@ -1,4 +1,5 @@
-<?php include( 'header.php' ); ?>
+<?php include( 'header.php' ); 
+//var_dump($events);?>
             <div class="row">
                 <div class="large-12 columns">
                     <div class="row">
@@ -7,16 +8,13 @@
                             <h4>Welcome to Guild Name</h4><hr>
 
                             <?php foreach( $blogs as $blog ): ?>
-                            <article>
-                                <h3><a href="#"><?php echo $blog->title ?></a></h3>
-                                <h6>Written by <a href="#"><?php echo $blog->username ?></a> on <?php echo $blog->posted ?></h6>
-                                <?php echo $blog->content ?>
-                                <p><a href=""><?php echo $blog->replies . ( $blog->replies == 1 ? ' Reply' : ' Replies' ) ?></a></p>
+                                <article>
+                                    <h3><a href="<?php echo base_url() . 'forum/thread/' . $blog->tid; ?>"><?php echo $blog->title ?></a></h3>
+                                    <h6>Written by <a href="#"><?php echo $blog->username ?></a> on <?php echo $blog->posted ?></h6>
+                                    <?php echo $blog->content ?>
+                                    <p><a href="<?php echo base_url() . 'forum/thread/' . $blog->tid; ?>"><?php echo $blog->replies . ( $blog->replies == 1 ? ' Reply' : ' Replies' ) ?></a></p>
 
-                            </article>
-
-
-
+                                </article>
                             <?php endforeach; ?>
                             <article>
                              
@@ -52,24 +50,29 @@
                         <div class="large-4 small-12 columns">
  
                             <h4>Events</h4><hr>
-                            <div class="panel">
-                                <h5><a href="#">Event Title 1</a></h5>
- 
-                                <h6 class="subheader">
-                                    Risus ligula, aliquam nec fermentum vitae, sollicitudin eget urna. Suspendisse ultrices ornare tempor...
-                                </h6>
- 
-                                <h6><a href="#">Read More »</a></h6>
-                            </div>
- 
-                            <div class="panel hide-for-small">
-                                <h5><a href="#">Event Title 2 »</a></h5>
-                            </div>
- 
-                            <div class="panel hide-for-small">
-                                <h5><a href="#">Event Title 3 »</a></h5>
-                            </div>
- 
+                            <?php if( !$events ): ?>
+                                No events
+                            <?php else: ?>
+                                <div class="panel">
+                                    <h5><a href="<?php echo base_url() . 'events/' . $events[0]->eid; ?>"><?php echo $events[0]->name ?></a></h5>
+     
+                                    <h6 class="subheader">
+                                        <?php echo $events[0]->description ?>
+                                    </h6>
+     
+                                    <h6><a href="<?php echo base_url() . 'events/' . $events[0]->eid; ?>">Read More »</a></h6>
+                                </div>
+                                <?php if( sizeof( $events > 0 ) ): ?>
+                                <div class="panel hide-for-small">
+                                    <h5><a href="<?php echo base_url() . 'events/' . $events[1]->eid; ?>"><?php echo $events[1]->name ?> »</a></h5>
+                                </div>
+                                <?php if( sizeof( $events > 1 ) ): ?>
+                                <div class="panel hide-for-small">
+                                    <h5><a href="<?php echo base_url() . 'events/' . $events[2]->eid; ?>"><?php echo $events[2]->name ?> »</a></h5>
+                                </div>
+                                <?php endif; ?>
+                                <?php endif; ?>
+                            <?php endif; ?>
                             <a href="#" class="right">Go To Events »</a>
 
                             <h4>Recent Activity</h4><hr>
