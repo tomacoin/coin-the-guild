@@ -11,6 +11,6 @@ class Admin extends CI_Controller {
 
 	public function index()
 	{
-		redirect('/', 'refresh');
+		$this->load->view('admin/home');
 	}
 }

@@ -6424,3 +6424,15 @@ div.row > div.columns > div.row > div.columns {
   border-radius: 3px;
   margin-top: 7px;
 }
+
+.admin-nav {
+  position: absolute;
+}
+
+.admin-row {
+  padding-top: 30px;
+}
+
+.dashboard-panel {
+  display: inline-block;
+}
