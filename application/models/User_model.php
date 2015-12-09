@@ -9,23 +9,36 @@ class User_model extends CI_Model {
 
     function login( $username, $password )
 	{
-		$this->db->where("username", $username);
-		$this->db->where("password", $password);
+		$this->db->where( 'username', $username );
+		$this->db->where( 'password', $password );
 
-		$query=$this->db->get("users");
+		$query = $this->db->get( 'users' );
 		
-		if($query->num_rows()>0)
+		if( $query->num_rows() > 0 )
 		{
-			foreach($query->result() as $rows)
+			$user = $query->first_row();
+			$avatar = '';
+			$role = '';
+
+			$this->db->where( 'uid', $user->uid );
+			$this->db->where( 'gid', 1 );
+			$query = $this->db->get( 'membership');
+
+			if( $query->num_rows() > 0 )
 			{
-				//add all data to session
-				$newdata = array(
-					'uid'  => $rows->uid,
-					'username'  => $rows->username,
-					'email'    => $rows->email,
-					'logged_in'  => TRUE,
-				);
+				$member = $query->first_row();
+				$avatar = $member->avatar;
+				$role = $member->role;
 			}
+
+			$newdata = array(
+				'uid'  		=> $user->uid,
+				'username'  => $user->username,
+				'email'    	=> $user->email,
+				'avatar'	=> $avatar,
+				'role'		=> $role,
+				'logged_in' => TRUE,
+			);
 			$this->session->set_userdata( $newdata );
 			return true;
 		}		

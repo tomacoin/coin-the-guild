@@ -53,8 +53,14 @@
             <ul class="right">
                 <?php if( !$is_member ): ?>
                 <li><?php echo anchor('guild/join', 'Join', array('class' => 'button')); ?></li>
+                <?php else:?>
+                <li><img class="top-card-pic" src="<?php echo base_url( 'images/' . $this->session->userdata('avatar') ) ?>"></li>
                 <?php endif; ?>
                 <li><?php echo anchor('user/settings', $this->session->userdata('username') ); ?></li>
+                <?php if( $this->session->userdata('role') == 1 ): ?>
+                <li class="divider"></li>
+                <li><?php echo anchor('admin', 'Admin'); ?></li>
+                <?php endif; ?>
                 <li class="divider"></li>
                 <li><?php echo anchor('user/logout', 'Logout'); ?></li>
             </ul>

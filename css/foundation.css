@@ -6417,3 +6417,10 @@ label {
 div.row > div.columns > div.row > div.columns {
   min-height: 300px;
 }
+
+.top-card-pic {
+  height: 30px;
+  width: 30px;
+  border-radius: 3px;
+  margin-top: 7px;
+}
