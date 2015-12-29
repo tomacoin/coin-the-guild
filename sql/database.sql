@@ -1,14 +1,19 @@
 -- --------------------------------------------------------
 -- Host:                         127.0.0.1
 -- Server version:               5.6.17 - MySQL Community Server (GPL)
--- Server OS:                    Win32
--- HeidiSQL Version:             9.1.0.4867
+-- Server OS:                    Win64
+-- HeidiSQL Version:             9.3.0.4984
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8mb4 */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+
+-- Dumping database structure for cointheguild
+CREATE DATABASE IF NOT EXISTS `cointheguild` /*!40100 DEFAULT CHARACTER SET utf8 */;
+USE `cointheguild`;
+
 
 -- Dumping structure for table cointheguild.events
 CREATE TABLE IF NOT EXISTS `events` (
@@ -51,10 +56,8 @@ CREATE TABLE IF NOT EXISTS `guilds` (
   `gid` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `owner` int(11) NOT NULL,
-  `motto` text COLLATE utf8_unicode_ci NOT NULL,
   `description` text COLLATE utf8_unicode_ci,
-  `created` datetime NOT NULL,
-  `game` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
+  `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`gid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
@@ -69,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `membership` (
   `motto` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `location` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `avatar` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'pic.png',
-  `joined` datetime NOT NULL,
+  `joined` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `quit` datetime NOT NULL,
   `posts` int(11) NOT NULL DEFAULT '0',
   KEY `FK_guild_user` (`gid`),
@@ -107,6 +110,7 @@ CREATE TABLE IF NOT EXISTS `threads` (
   `title` text NOT NULL,
   `poster` int(11) NOT NULL,
   `content` text NOT NULL,
+  `blog` enum('Y','N') DEFAULT 'N',
   `posted` datetime NOT NULL,
   `edited` datetime DEFAULT NULL,
   `original` text,
@@ -127,7 +131,6 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(254) COLLATE utf8_unicode_ci NOT NULL,
-  `avatar_url` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `joined` datetime NOT NULL,
   `last_on` datetime NOT NULL,
   PRIMARY KEY (`uid`)

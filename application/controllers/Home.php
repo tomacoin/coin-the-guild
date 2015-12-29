@@ -13,6 +13,11 @@ class Home extends CI_Controller {
 
 	public function index()
 	{
+		if( $this->home_model->is_first_time() )
+		{
+			$this->load->view( 'setup' );
+			return;
+		}	
 		$blogs = $this->home_model->get_blogs( 1 );
 		foreach( $blogs as $blog )
 		{

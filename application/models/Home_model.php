@@ -7,6 +7,19 @@ class Home_model extends CI_Model {
         parent::__construct();
     }
 
+    function is_first_time()
+    {
+    	$this->db->select( 'gid' );
+    	$this->db->from('guilds');
+
+    	$result = $this->db->get();
+    	if( $result->num_rows() > 0 )
+    	{
+    		return false;
+    	}
+		return true;
+    }
+
 	function get_blogs( $gid )
 	{
 		$this->db->select('

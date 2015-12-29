@@ -7,17 +7,20 @@ class Guild_model extends CI_Model {
         parent::__construct();
     }
 
-    function create_guild ( ) 
+    function create_guild() 
     {
-
+        $this->load->model('user_model');
+        $this->load->model('guild_model');
+        $owner = $this->user_model->get_uid( $this->input->post( 'username' ) );
         $data = array(
-            'name' => $this->input->post( 'name' ),
-            'owner' => $this->session->userdata('uid'),
-            'description' => $this->input->post( 'description' ),
-            'game' => $this->input->post( 'game' ),
+            'gid' => 1,
+            'name' => $this->input->post( 'guild_name' ),
+            'owner' => $owner,
+            'description' => $this->input->post( 'guild_desc' )
         );
-        $this->db->insert( 'users', $data );
-
+        $this->db->insert( 'guilds', $data );
+        $this->guild_model->join( 1, $owner, 3 );
+        return;
     }
 
     function change_settings( &$data ) 
@@ -91,12 +94,12 @@ class Guild_model extends CI_Model {
         return $this->db->get()->num_rows();
     }
 
-    function join ( $gid, $uid ) 
+    function join( $gid, $uid, $role = 0 ) 
     {
         $data = array(
             'gid' => $gid,
             'uid' => $uid,
-            'role' => 0
+            'role' => $role
         );
         $this->db->insert( 'membership', $data );
     }

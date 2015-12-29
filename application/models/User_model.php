@@ -40,12 +40,13 @@ class User_model extends CI_Model {
 				'logged_in' => TRUE,
 			);
 			$this->session->set_userdata( $newdata );
+			echo var_dump( $newdata );
 			return true;
 		}		
 		return false;
 	}
 
-	function create_user () 
+	function create_user() 
 	{
 		$data = array(
 			'username' => $this->input->post( 'username' ),
@@ -132,7 +133,7 @@ class User_model extends CI_Model {
 
 	function get_username ( $uid ) 
 	{
-		$query = $this->db->where('uid', $uid)->get();
+		$query = $this->db->from('users')->where('uid', $uid)->get();
 
 		if ($query->num_rows() > 0)
 		{
@@ -143,7 +144,7 @@ class User_model extends CI_Model {
 
 	function get_uid ( $username ) 
 	{
-		$query = $this->db->where('username', $username)->get();
+		$query = $this->db->from('users')->where('username', $username)->get();
 
 		if ($query->num_rows() > 0)
 		{

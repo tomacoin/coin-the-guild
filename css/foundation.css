@@ -6431,6 +6431,7 @@ div.row > div.columns > div.row > div.columns {
 
 .admin-row {
   padding-top: 30px;
+  padding-left: 100px;
 }
 
 .dashboard-panel {
