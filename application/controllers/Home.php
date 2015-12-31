@@ -17,14 +17,14 @@ class Home extends CI_Controller {
 		{
 			$this->load->view( 'setup' );
 			return;
-		}	
+		}
 		$blogs = $this->home_model->get_blogs( 1 );
 		foreach( $blogs as $blog )
 		{
 			$blog->replies = $this->forum_model->get_reply_count( $blog->tid );
 		}
-		$events = $this->event_model->get_events( 1, 3);
-		$activities = array();
+		$events = $this->event_model->get_events( 1, 3 );
+		$activities = $this->home_model->get_posts( 1 );
 		$this->load->view( 'home', array( 
 			'blogs' => $blogs, 
 			'events' => $events, 

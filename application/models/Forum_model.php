@@ -245,7 +245,6 @@ class Forum_model extends CI_Model {
 		$this->db->where('gid', $gid);
 		$this->db->where('uid', $uid);
 		$result = $this->db->get()->result();
-		echo $this->db->last_query();
 		$user_posts = $result[0]->posts;
 
 		$data = array(

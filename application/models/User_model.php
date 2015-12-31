@@ -40,7 +40,6 @@ class User_model extends CI_Model {
 				'logged_in' => TRUE,
 			);
 			$this->session->set_userdata( $newdata );
-			echo var_dump( $newdata );
 			return true;
 		}		
 		return false;

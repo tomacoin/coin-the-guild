@@ -44,4 +44,14 @@ class Home_model extends CI_Model {
 		return $result;
 	}
 
+	function get_posts( $gid )
+	{
+		$this->db->from( 'threads' );
+		$this->db->order_by( 'posted', 'desc' );
+		$this->db->limit( 3 );
+
+		$result = $this->db->get()->result();
+		return $result;
+	}
+
 }

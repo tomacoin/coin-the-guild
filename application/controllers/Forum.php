@@ -56,7 +56,7 @@ class Forum extends CI_Controller {
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
 		{
 			if ( $tid === "new" ) {
-				$this->form_validation->set_rules( 'title', 'Title', 'trim|required|min_length[10]' );
+				$this->form_validation->set_rules( 'title', 'Title', 'trim|required|min_length[5]' );
 				$this->form_validation->set_rules( 'content', 'Post', 'trim|required|min_length[10]' );
 
 				if($this->form_validation->run() == FALSE)
