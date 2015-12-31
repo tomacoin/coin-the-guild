@@ -6,11 +6,28 @@ class Admin extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Admin_model', 'am');
+		$this->load->model('admin_model' );
+		$this->load->model('guild_model' );
+		$this->load->model('forum_model' );
 	}
 
 	public function index()
 	{
-		$this->load->view('admin/home');
+		$member_log = $this->guild_model->get_recent_members( 1 );
+		$post_log = $this->forum_model->get_recent_posts( 1 );
+		$this->load->view('admin/home', array (
+				'member_log' => $member_log, 
+				'post_log' => $post_log, 
+			)
+		);
+	}
+
+	public function users()
+	{
+		$member_log = $this->guild_model->get_recent_members( 1 );
+		$this->load->view('admin/home', array (
+				'members' => $members
+			)
+		);
 	}
 }

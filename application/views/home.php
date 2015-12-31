@@ -53,7 +53,8 @@
                                     <h5><a href="<?php echo base_url() . 'forum/thread/' . $activities[0]->tid; ?>"><?php echo $activities[0]->title ?></a></h5>
      
                                     <h6 class="subheader">
-                                        <?php echo strlen( $activities[0]->content ) > 100 ? substr( $activities[0]->content ,0,100)."..." : $activities[0]->content; ?>
+                                        <?php $content = strip_tags( $activities[0]->content ); ?>
+                                        <?php echo strlen( $content ) > 100 ? substr( $content ,0,100)."..." : $content; ?>
 
                                     </h6>
      

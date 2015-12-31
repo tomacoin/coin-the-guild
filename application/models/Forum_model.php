@@ -238,6 +238,25 @@ class Forum_model extends CI_Model {
 		return $result;
 	}
 
+	function get_recent_posts( $gid )
+	{
+		$this->db->select('
+			title,
+			replies.content,
+			replies.posted,
+			username
+		');
+
+		$this->db->from('replies');
+		$this->db->join('threads', 'threads.tid = replies.tid');
+		$this->db->join('users', 'users.uid = replies.poster');
+		$this->db->join('membership', 'users.uid = membership.uid AND membership.gid = 1');		
+		$this->db->order_by( 'posted', 'desc' );		
+		$this->db->limit( 7 );
+		$result = $this->db->get()->result();
+		return $result;
+	}
+
 	function increment_posts( $gid, $uid )
 	{
 		$this->db->select('posts');

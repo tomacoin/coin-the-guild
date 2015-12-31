@@ -6432,11 +6432,9 @@ div.row > div.columns > div.row > div.columns {
 .admin-row {
   padding-top: 30px;
   padding-left: 100px;
+  max-width: initial;
 }
 
-.dashboard-panel {
-  display: inline-block;
-}
 a.item {
   color: white;
   cursor: pointer;

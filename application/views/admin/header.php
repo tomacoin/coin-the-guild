@@ -19,19 +19,19 @@ $is_member = $this->gm->is_member( 1, $uid );
 
     <?php include( 'topbar.php' ); ?>
     <div class="admin-nav icon-bar vertical four-up">
-      <a class="item">
+      <a href="<?php echo base_url(); ?>admin" class="item">
         <i class="fa fa-home"></i>
         <label>Home</label>
       </a>
-      <a class="item">
+      <a href="<?php echo base_url(); ?>admin/users" class="item">
         <i class="fa fa-user"></i>
         <label>Users</label>
       </a>
-      <a class="item">
+      <a href="<?php echo base_url(); ?>admin/layout" class="item">
         <i class="fa fa-picture-o"></i>
         <label>Layout</label>
       </a>
-      <a class="item">
+      <a href="<?php echo base_url(); ?>admin/settings" class="item">
         <i class="fa fa-cog"></i>
         <label>Settings</label>
       </a>

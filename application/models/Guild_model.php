@@ -72,6 +72,17 @@ class Guild_model extends CI_Model {
         return $query;
     }
 
+    function get_recent_members ( $gid )
+    {
+        $this->db->select('users.uid, users.username, users.last_on, membership.avatar, membership.joined, membership.role');
+        $this->db->where('gid', $gid);
+        $this->db->from('membership');
+        $this->db->join('users', 'users.uid = membership.uid');
+        $this->db->order_by('joined', 'desc');
+        $query = $this->db->get()->result();
+        return $query;
+    }
+
     function get_owner ( $gid ) 
     {
         $this->db->
