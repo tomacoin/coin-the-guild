@@ -7,6 +7,7 @@ class Admin extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('admin_model' );
+		$this->load->model('user_model' );
 		$this->load->model('guild_model' );
 		$this->load->model('forum_model' );
 	}
@@ -24,10 +25,19 @@ class Admin extends CI_Controller {
 
 	public function users()
 	{
-		$member_log = $this->guild_model->get_recent_members( 1 );
-		$this->load->view('admin/home', array (
+		$members = $this->guild_model->get_members( 1 );
+		$this->load->view('admin/users', array (
 				'members' => $members
 			)
 		);
+	}
+
+	public function kick( $username )
+	{
+		$uid = $this->user_model->get_uid( $username );
+		$members = $this->guild_model->leave( 1, $uid );
+		$this->session->set_flashdata('kicked', $username );
+		redirect('admin/users');
+
 	}
 }

@@ -20,6 +20,14 @@
             $('#myModal').foundation('reveal', 'open')
         });
         <?php endif; ?>
+
+    function kick( name )
+    {
+        $( '#kick' ).attr("href", "<?php echo base_url(); ?>admin/kick/" + name );
+        $( '#kickee' ).html( name );
+        console.log( name );
+         $('#kick-member').foundation('reveal', 'open')
+    }
     </script>   
     <div class="reveal-modal-bg" style="display: none;"></div>
 </body>

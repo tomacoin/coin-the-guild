@@ -63,7 +63,7 @@ class Guild_model extends CI_Model {
 
     function get_members ( $gid ) 
     {
-        $this->db->select('users.uid, users.username, users.last_on, membership.avatar, membership.joined, membership.role');
+        $this->db->select('users.uid, users.username, users.last_on, membership.avatar, membership.joined, membership.role, membership.posts');
         $this->db->where('gid', $gid);
         $this->db->from('membership');
         $this->db->join('users', 'users.uid = membership.uid');
@@ -128,7 +128,7 @@ class Guild_model extends CI_Model {
         $this->session->set_userdata( $newdata );
     }
 
-    function leave ( $uid, $gid ) 
+    function leave ( $gid, $uid ) 
     {
         $data = array(
             'gid' => $gid,
