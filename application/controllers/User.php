@@ -50,7 +50,8 @@ class User extends CI_Controller {
 		else
 		{
 			$this->user_model->create_user();
-			$this->index();
+			$this->session->set_flashdata( 'new_user', true );
+			redirect('/');
 		}
 	}
 

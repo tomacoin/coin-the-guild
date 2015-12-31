@@ -19,7 +19,7 @@ class Guild extends CI_Controller {
 		if( !$this->gm->is_member( 1, $this->session->userdata('uid') ) )
 		{
 			$this->gm->join( 1, $this->session->userdata('uid') );
-			$this->session->set_flashdata( 'new', true );
+			$this->session->set_flashdata( 'new_member', true );
 		}
 
 		redirect('/');

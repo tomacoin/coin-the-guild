@@ -47,16 +47,16 @@
             </li>
             <li class="toggle-topbar menu-icon"><a href="#"><span>menu</span></a></li>
         </ul>
- 
         <section class="top-bar-section">
           <?php if( $this->session->userdata('username') ): ?>
             <ul class="right">
                 <?php if( !$is_member ): ?>
                 <li><?php echo anchor('guild/join', 'Join', array('class' => 'button')); ?></li>
+                <li><?php echo $this->session->userdata('username'); ?></li>
                 <?php else:?>
                 <li><img class="top-card-pic" src="<?php echo base_url( 'images/' . $this->session->userdata('avatar') ) ?>"></li>
-                <?php endif; ?>
                 <li><?php echo anchor('user/settings', $this->session->userdata('username') ); ?></li>
+                <?php endif; ?>                
                 <?php if( $this->session->userdata('role') == 1 ): ?>
                 <li class="divider"></li>
                 <li><?php echo anchor('admin', 'Admin'); ?></li>

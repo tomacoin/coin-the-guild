@@ -34,19 +34,19 @@ $is_member = $this->gm->is_member( 1, $uid );
                 <div class="large-12">
                     <div class="icon-bar five-up">
                         <a href="<?php echo base_url(); ?>" class="item">
-                            <label>Home</label>
+                            Home
                           </a>
                           <a href="<?php echo base_url(); ?>events" class="item">
-                            <label>Events</label>
+                            Events
                           </a>
                           <a href="<?php echo base_url(); ?>forum" class="item">
-                            <label>Forum</label>
+                            Forum
                           </a>
                           <a href="<?php echo base_url(); ?>members" class="item">
-                            <label>Members</label>
+                            Members
                           </a>
                           <a href="<?php echo base_url(); ?>about" class="item">
-                            <label>About</label>
+                            About
                           </a>
                         </div>
 

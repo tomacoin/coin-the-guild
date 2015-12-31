@@ -17,7 +17,12 @@
             </footer>
         </div>
     </div>
-<div id="myModal" class="reveal-modal" data-reveal>
+<div id="new-user" class="reveal-modal" data-reveal>
+    <h3>Thank you for signing up!</h3>
+    <p class="lead">You have successfully registered.</p> <p>Log in to join this guild!</p>
+    <a class="close-reveal-modal">&#215;</a>
+</div>
+<div id="new-member" class="reveal-modal" data-reveal>
     <h3>Welcome to <?php echo $guild; ?></h3>
     <p class="lead">You have successfully joined the guild.</p> <p>We hope you enjoy your stay!</p>
     <a class="close-reveal-modal">&#215;</a>
@@ -31,9 +36,14 @@
     <script src="<?php echo base_url(); ?>js/foundation.min.js"></script>
     <script>
         $(document).foundation();
-        <?php if( $this->session->flashdata('new') ): ?>
+        <?php if( $this->session->flashdata('new_user') ): ?>
         $(document).ready(function(){
-            $('#myModal').foundation('reveal', 'open')
+            $('#new-user').foundation('reveal', 'open')
+        });
+        <?php endif; ?>
+        <?php if( $this->session->flashdata('new_member') ): ?>
+        $(document).ready(function(){
+            $('#new-member').foundation('reveal', 'open')
         });
         <?php endif; ?>
     </script>   

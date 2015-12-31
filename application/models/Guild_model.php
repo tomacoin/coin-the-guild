@@ -19,6 +19,13 @@ class Guild_model extends CI_Model {
             'description' => $this->input->post( 'guild_desc' )
         );
         $this->db->insert( 'guilds', $data );
+        $data = array(
+            'fid' => 1,
+            'gid' => 1,
+            'name' => $this->input->post( 'guild_name' ),
+            'description' => $this->input->post( 'guild_desc' )
+        );
+        $this->db->insert( 'forums', $data );
         $this->guild_model->join( 1, $owner, 3 );
         return;
     }
@@ -56,7 +63,7 @@ class Guild_model extends CI_Model {
 
     function get_members ( $gid ) 
     {
-        $this->db->select('users.uid, users.username, users.last_on, users.avatar_url, membership.avatar, membership.joined, membership.role');
+        $this->db->select('users.uid, users.username, users.last_on, membership.avatar, membership.joined, membership.role');
         $this->db->where('gid', $gid);
         $this->db->from('membership');
         $this->db->join('users', 'users.uid = membership.uid');
@@ -102,6 +109,12 @@ class Guild_model extends CI_Model {
             'role' => $role
         );
         $this->db->insert( 'membership', $data );
+
+        $newdata = array(
+            'avatar'    => 'default.jpg',
+            'role'      => $role
+        );
+        $this->session->set_userdata( $newdata );
     }
 
     function leave ( $uid, $gid ) 

@@ -6437,3 +6437,11 @@ div.row > div.columns > div.row > div.columns {
 .dashboard-panel {
   display: inline-block;
 }
+a.item {
+  color: white;
+  cursor: pointer;
+  display: block;
+  font-size: 0.875rem;
+  font-weight: normal;
+  line-height: 1.5;
+}
