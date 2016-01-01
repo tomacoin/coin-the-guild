@@ -26,7 +26,7 @@ class Guild_model extends CI_Model {
             'description' => $this->input->post( 'guild_desc' )
         );
         $this->db->insert( 'forums', $data );
-        $this->guild_model->join( 1, $owner, 3 );
+        $this->guild_model->join( 1, $owner, 1 );
         return;
     }
 

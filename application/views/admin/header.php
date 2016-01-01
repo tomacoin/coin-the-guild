@@ -9,7 +9,7 @@ $is_member = $this->gm->is_member( 1, $uid );
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Foundation | Welcome</title>
+        <title><?php echo $guild ?> | Admin</title>
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/foundation.css" />
         <link rel="stylesheet" href="<?php echo base_url(); ?>css/foundation-icons/foundation-icons.css" />
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">

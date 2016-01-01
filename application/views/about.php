@@ -6,6 +6,9 @@
                         <div class="large-8 small-12 columns">
 
                             <h4>About <?php echo $name; ?></h4><hr>
+                            <?php if( !$about or $about === " " ): ?>
+                                There is no information about this guild yet.
+                            <?php endif; ?>
                             <?php echo $about; ?>
                             <!-- 
                              <ul class="clearing-thumbs" data-clearing>
@@ -20,6 +23,9 @@
  
                             <h4>Rules</h4><hr>
                             <div class="panel">
+                                <?php if( !$join or $join === " " ): ?>
+                                    There is no information joining this guild yet.
+                                <?php endif; ?>
                                 <?php echo $join; ?>
                             </div>
                             

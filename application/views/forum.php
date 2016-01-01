@@ -20,19 +20,25 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-
+                                <?php if( !$threads ): ?>
+                                    <tr>
+                                        <td colspan="3">
+                                            Click "New Thread" to create a new thread!
+                                        </td>
+                                    </tr>
+                                <?php endif; ?>
                                 <?php foreach( $threads as $thread ): ?>
                                     <tr>
                                         <td>
                                             <h5><a href="<?php echo $forum_url . '/thread/' . $thread->tid; ?>"><?php echo $thread->thread_title; ?></a></h5>
                                             <h6 class="subheader">
                                                 Posted by 
-                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $thread->thread_poster; ?></span> at <?php echo $thread->thread_time; ?>
+                                                <b><?php echo $thread->thread_poster; ?></b> at <?php echo $thread->thread_time; ?>
                                             </h6>
                                         </td>
                                         <?php if( $thread->reply_count ): ?>
                                         <td class="text-right"> 
-                                                <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $thread->reply_poster; ?></span><br /> <a href=""><?php echo $thread->reply_time; ?> &raquo;</a>
+                                                <b><?php echo $thread->reply_poster; ?></b><br /> <a href=""><?php echo $thread->reply_time; ?> &raquo;</a>
                                         </td>
                                         <?php else: ?>
                                         <td class="text-center"> 
@@ -98,11 +104,14 @@
                             <h4>Top Posters</h4><hr>
                             <?php foreach( $top_posters as $top_poster ): ?>
                             <img src="<?php echo base_url( 'images/' . $top_poster->avatar ) ?>" class="top-poster">
-                            <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $top_poster->username; ?></span><br />
+                            <b><?php echo $top_poster->username; ?></b><br />
                             <h6 class="subheader"><?php echo $top_poster->posts . ( $top_poster->posts == 1 ? ' Post' : ' Posts' ) ?></h6>
                             <?php endforeach; ?>
                             <br />
                             <h4>Top Threads</h4><hr> 
+                            <?php if( !$top_threads ): ?>
+                                No threads
+                            <?php endif; ?>
                             <?php foreach( $top_threads as $top_thread ): ?>
                             <h5><a href="#"><?php echo $top_thread->title; ?> </a><small><?php echo $top_thread->count . ( $top_thread->count == 1 ? ' Post' : ' Posts' ) ?></small></h5>
                             <?php endforeach; ?>

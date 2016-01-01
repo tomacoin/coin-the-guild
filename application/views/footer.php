@@ -28,11 +28,6 @@
     <a class="close-reveal-modal">&#215;</a>
 </div>
  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
-    <script>
-    document.write('<script src=<?php echo base_url(); ?>js/vendor/' +
-    ('__proto__' in {} ? 'zepto' : 'jquery') +
-    '.js><\/script>')
-    </script>
     <script src="<?php echo base_url(); ?>js/foundation.min.js"></script>
     <script>
         $(document).foundation();

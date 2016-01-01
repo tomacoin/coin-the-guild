@@ -4,7 +4,7 @@
         <div class="row">
             <div class="large-12 small-12 columns">
                 <h4>Settings</h4><hr>
-                <p>Manage the appearance of the guild page.</p>
+                <p>Change guild settings and the about page.</p>
                 <?php if( $this->session->flashdata('success') ): ?>
                     <div data-alert class="alert-box success radius">
                         <?php echo $this->session->flashdata('success') ?>

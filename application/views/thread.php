@@ -76,7 +76,7 @@
                                     <tr>
                                         <td>
                                             <img class="member-card-pic" src="<?php echo base_url( 'images/' . $thread->avatar ) ?>">
-                                            <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $thread->username; ?></span>
+                                            <b><?php echo $thread->username; ?></b>
                                             <br />
                                             <h7 class="subheader"><?php echo $thread->motto; ?></h7>
                                         </td>
@@ -91,9 +91,9 @@
                                     <tr>
                                         <td>
                                             <img class="member-card-pic" src="<?php echo base_url( 'images/' . $thread->avatar ) ?>">
-                                            <span data-tooltip aria-haspopup="true" class="has-tip" title="Tooltips are awesome, you should totally use them!"><?php echo $reply->username; ?></span>
+                                            <b><?php echo $reply->username; ?></b>
                                             <br />
-                                            <h7 class="subheader">I am cool</h7>
+                                            <h7 class="subheader"><?php echo $thread->motto; ?></h7>
                                         </td>
                                         <td> 
                                             <h5>RE: <?php echo $thread->title; ?></h5>

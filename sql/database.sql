@@ -57,6 +57,9 @@ CREATE TABLE IF NOT EXISTS `guilds` (
   `name` varchar(45) COLLATE utf8_unicode_ci NOT NULL,
   `owner` int(11) NOT NULL,
   `description` text COLLATE utf8_unicode_ci,
+  `about` varchar(800) COLLATE utf8_unicode_ci DEFAULT ' ',
+  `rules` varchar(255) COLLATE utf8_unicode_ci DEFAULT '[]',
+  `join` varchar(255) COLLATE utf8_unicode_ci DEFAULT ' ',
   `created` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`gid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
@@ -71,7 +74,7 @@ CREATE TABLE IF NOT EXISTS `membership` (
   `role` int(11) NOT NULL DEFAULT '3',
   `motto` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
   `location` varchar(45) COLLATE utf8_unicode_ci DEFAULT NULL,
-  `avatar` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'pic.png',
+  `avatar` varchar(50) COLLATE utf8_unicode_ci NOT NULL DEFAULT 'default.jpg',
   `joined` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `quit` datetime NOT NULL,
   `posts` int(11) NOT NULL DEFAULT '0',
@@ -131,7 +134,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `username` varchar(20) COLLATE utf8_unicode_ci NOT NULL,
   `password` varchar(255) COLLATE utf8_unicode_ci NOT NULL,
   `email` varchar(254) COLLATE utf8_unicode_ci NOT NULL,
-  `joined` datetime NOT NULL,
+  `joined` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `last_on` datetime NOT NULL,
   PRIMARY KEY (`uid`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;

@@ -108,12 +108,16 @@ class User_model extends CI_Model {
     		$query = $this->db->get();
 			if ($query->num_rows() > 0)
 			{
-			   $row = $query->row();
-			   $avatar = $row->avatar;
-			   unlink( 'images/' . $avatar );
+				$row = $query->row();
+				$avatar = $row->avatar;
+				if( $avatar != 'default.png' )
+				{			   	
+					unlink( 'images/' . $avatar );
+				}
 			}
 
         	$membership_data['avatar'] = $upload['file_name'];
+        	$this->session->set_userdata( 'avatar', $membership_data['avatar'] );
         }
         $this->db->where( 'uid', $uid);
         $this->db->where( 'gid', $gid);

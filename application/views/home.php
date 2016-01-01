@@ -34,11 +34,11 @@
      
                                     <h6><a href="<?php echo base_url() . 'events/' . $events[0]->eid; ?>">Read More »</a></h6>
                                 </div>
-                                <?php if( sizeof( $events )> 0 ): ?>
+                                <?php if( sizeof( $events ) > 1 ): ?>
                                 <div class="panel hide-for-small">
                                     <h5><a href="<?php echo base_url() . 'events/' . $events[1]->eid; ?>"><?php echo $events[1]->name ?> »</a></h5>
                                 </div>
-                                <?php if( sizeof( $events )> 1 ): ?>
+                                <?php if( sizeof( $events ) > 2 ): ?>
                                 <div class="panel hide-for-small">
                                     <h5><a href="<?php echo base_url() . 'events/' . $events[2]->eid; ?>"><?php echo $events[2]->name ?> »</a></h5>
                                 </div>

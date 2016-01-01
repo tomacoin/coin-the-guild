@@ -10,6 +10,11 @@ class Admin extends CI_Controller {
 		$this->load->model('user_model' );
 		$this->load->model('guild_model' );
 		$this->load->model('forum_model' );
+
+		if( $this->session->userdata('role') != 1 )
+		{
+			redirect('user/login');
+		}
 	}
 
 	public function index()
