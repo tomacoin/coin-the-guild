@@ -4,7 +4,7 @@
         <div class="row">
             <div class="large-8 small-12 columns">
                 <h4>Dashboard</h4><hr>
-                <br />
+                <a href="admin/post" class="button secondary">New Blog Post</a>
                 <h5>Member Log</h5><br />
                 <table class="large-12 small-12">
                     <thead>

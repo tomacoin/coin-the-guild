@@ -5,7 +5,7 @@
                     <div class="row">
                         <div class="large-8 small-12 columns">
 
-                            <h4>Welcome to Guild Name</h4><hr>
+                            <h4>Welcome to <?php echo $guild ?></h4><hr>
 
                             <?php foreach( $blogs as $blog ): ?>
                                 <article>

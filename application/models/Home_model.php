@@ -37,6 +37,7 @@ class Home_model extends CI_Model {
 		$this->db->from('threads');
 		$this->db->join('users', 'users.uid = threads.poster');
 		$this->db->join('membership', 'users.uid = membership.uid AND membership.gid = 1');
+		$this->db->order_by( 'posted', 'desc' );
 		$this->db->where( 'blog', 'Y' );
 		$this->db->limit( 2 );
 

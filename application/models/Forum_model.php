@@ -34,12 +34,13 @@ class Forum_model extends CI_Model {
 		$this->db->delete( 'forums' );
 	}
 
-	function create_thread ( $fid, $title, $content )
+	function create_thread ( $fid, $title, $content, $blog = 'N' )
 	{
 		$data = array(
 			'fid' 		=> $fid,
 			'title' 	=> $title,
 			'poster' 	=> $this->session->userdata('uid'),
+			'blog'		=> $blog,
 			'posted' 	=> date('Y-m-d H:i:s'),
 			'content' 	=> $this->typography->auto_typography($content)
 		);

@@ -87,4 +87,16 @@ class Admin extends CI_Controller {
 			)
 		);
 	}
+
+	public function post()
+	{
+		if ($_SERVER['REQUEST_METHOD'] == 'POST')
+		{
+			$title = $this->input->post( 'title' );
+			$content = $this->input->post( 'content' );
+			$this->forum_model->create_thread ( 1, $title, $content, 'Y' );
+			$this->session->set_flashdata('success', 'Blog post published.' );
+		}
+		$this->load->view('admin/post');
+	}
 }
