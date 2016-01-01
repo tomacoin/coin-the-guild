@@ -17,8 +17,8 @@
 <?php echo form_open("user/register"); ?>
 <input type="text" name="username" id="username" class="modal-input" placeholder="Username" />
 <input type="text" name="email" id="email" class="modal-input" placeholder="E-mail" />
-<input type="text" name="password" id="password" class="modal-input" placeholder="Password" />
-<input type="text" name="password2" id="password2" class="modal-input" placeholder="Confirm Password" />
+<input type="password" name="password" id="password" class="modal-input" placeholder="Password" />
+<input type="password" name="password2" id="password2" class="modal-input" placeholder="Confirm Password" />
 <input type="submit" value="Register" class="button large-12" \>
 <?php echo form_close(); ?>
 </div>

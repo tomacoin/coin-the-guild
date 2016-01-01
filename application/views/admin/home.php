@@ -48,7 +48,7 @@
             <div class="large-4 small-12 columns">
 
                 <h4>Calendar</h4><hr>
-                <p class="clock">3:24PM</p>
+                <p class="clock"><?php echo date("h:i A") ?></p>
                 <table class="event-calendar">
                     <tr>
                         <th>S</th>

@@ -6,7 +6,9 @@
                         <div class="large-8 small-12 columns">
 
                             <h4>Welcome to <?php echo $guild ?></h4><hr>
-
+                            <?php if( !$blogs ): ?>
+                                Create a blog post to have it published here!<br />
+                            <?php endif; ?>
                             <?php foreach( $blogs as $blog ): ?>
                                 <article>
                                     <h3><a href="<?php echo base_url() . 'forum/thread/' . $blog->tid; ?>"><?php echo $blog->title ?></a></h3>
@@ -47,7 +49,7 @@
                             <br /><br />
                             <h4>Recent Activity</h4><hr>
                             <?php if( !$activities ): ?>
-                                No events<br /><br />
+                                No recent activity<br /><br />
                             <?php else: ?>
                                 <div class="panel">
                                     <h5><a href="<?php echo base_url() . 'forum/thread/' . $activities[0]->tid; ?>"><?php echo $activities[0]->title ?></a></h5>

@@ -6,6 +6,9 @@
 
                             <h4>Events<?php echo anchor('events/create', 'New Event', array('class' => 'text-right small button secondary new-thread')); ?></h4>
                             <br />
+                            <?php if( !$events ): ?>
+                                No events have been scheduled.<br />
+                            <?php endif; ?>
                             <?php foreach( $events as $event ): ?>
                             <div class="panel">
                                 <h5><a href="#"><?php echo $event->name ?></a></h5>
@@ -37,7 +40,7 @@
                         <div class="large-4 small-12 columns">
  
                             <h4>Calendar</h4><hr>
-                            <p class="clock">3:24PM</p>
+                            <p class="clock"><?php echo date("h:i A") ?></p>
                             <table class="event-calendar">
                                 <tr>
                                     <th>S</th>
@@ -49,6 +52,7 @@
                                     <th>S</th>
                                 </tr>
                                 <?php
+                                    echo date( "F" ) . "<br />";
                                     $mstart = date( "N", strtotime( date("Y") . "-" . date("m") . "-01" ) );
                                     $day = 1;
                                     $days = date("t");

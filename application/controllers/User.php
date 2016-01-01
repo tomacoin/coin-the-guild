@@ -42,9 +42,13 @@ class User extends CI_Controller {
 		$this->form_validation->set_rules( 'email', 'Email', 'trim|required|valid_email' );
 		$this->form_validation->set_rules( 'password', 'Password', 'trim|required|min_length[4]|max_length[32]' );
 		$this->form_validation->set_rules( 'password2', 'Password Confirmation', 'trim|required|matches[password]' );
-
-		if( $this->form_validation->run() == FALSE )
+		$taken = $this->user_model->get_uid( $this->input->post( 'username' ) );
+		if( $this->form_validation->run() == FALSE || $taken )
 		{
+			if( $taken )
+			{				
+				$this->form_validation->set_message('is_unique', 'Username is taken');
+			}
 			$this->load->view( 'register' );
 		}
 		else

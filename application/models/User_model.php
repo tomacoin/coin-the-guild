@@ -150,6 +150,7 @@ class User_model extends CI_Model {
 		   $row = $query->row();
 		   return $row->uid;
 		}
+		return false;
 	}
 
 }

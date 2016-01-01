@@ -14,7 +14,7 @@
 <h3 id="modalTitle">Log In</h3>
 <?php echo form_open("user/login"); ?>
 <input type="text" name="username" id="username" class="modal-input" placeholder="Username" />
-<input type="text" name="password" id="password" class="modal-input" placeholder="Password" />
+<input type="password" name="password" id="password" class="modal-input" placeholder="Password" />
 <a href="#">Forgot Password?</a>
 <br /><br />
 <input type="submit" value="Log In" class="button large-12" \>
