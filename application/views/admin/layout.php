@@ -3,7 +3,7 @@
     <div class="large-12 columns">
         <div class="row">
             <div class="large-12 small-12 columns">
-                <h4>Layout</h4><hr>
+                <h4>Settings</h4><hr>
                 <p>Manage the appearance of the guild page.</p>
                 <?php if( $this->session->flashdata('success') ): ?>
                     <div data-alert class="alert-box success radius">

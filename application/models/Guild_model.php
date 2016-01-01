@@ -30,9 +30,23 @@ class Guild_model extends CI_Model {
         return;
     }
 
-    function change_settings( &$data ) 
-    {
-
+    function set_settings( $gid ) 
+    {        
+        $this->load->library('typography');
+        $rules = array();
+        if( $this->input->post( 'rule1' ) ) $rules[] = "<li>" . $this->input->post( 'rule1' ) . "</li>";
+        if( $this->input->post( 'rule2' ) ) $rules[] = "<li>" . $this->input->post( 'rule2' ) . "</li>";
+        if( $this->input->post( 'rule3' ) ) $rules[] = "<li>" . $this->input->post( 'rule3' ) . "</li>";
+        if( $this->input->post( 'rule4' ) ) $rules[] = "<li>" . $this->input->post( 'rule4' ) . "</li>";
+        $settings = array(
+            'name'   => $this->input->post( 'name' ),
+            'description'   => $this->input->post( 'description' ),
+            'join'   => $this->input->post( 'join' ),
+            'rules'   => json_encode( $rules ),
+            'about'   => $this->typography->auto_typography( $this->input->post( 'about' ) ),
+        );
+        $this->db->where( 'gid', 1);
+        $this->db->update( 'guilds', $settings );
     }
 
     function get_name ( $gid ) 
@@ -57,7 +71,11 @@ class Guild_model extends CI_Model {
     }
 
     function get_settings ( $gid ) 
-    {
+    {        
+        $this->db->where('gid', $gid );
+        $this->db->from('guilds');
+        $query = $this->db->get()->result();
+        return $query[0];
     }
 
     function get_banner ( $gid )

@@ -49,7 +49,7 @@ class Admin extends CI_Controller {
 		$config['max_width']  		= '1200';
 		$config['max_height']  		= '500';
 		$config['encrypt_name']		= false;
-        $config['file_name'] = "1-banner.png";
+        $config['file_name']	 	= "1-banner.png";
 
 		$this->load->library('upload', $config);
 		if ($_SERVER['REQUEST_METHOD'] == 'POST')
@@ -69,5 +69,22 @@ class Admin extends CI_Controller {
 		$this->load->view( 'admin/layout', array(
 			'banner'	=> $banner
 		));
+	}
+
+	public function settings()
+	{
+		if ($_SERVER['REQUEST_METHOD'] == 'POST')
+		{
+			$this->guild_model->set_settings( 1 );
+		}
+		$settings = $this->guild_model->get_settings( 1 );
+		$this->load->view('admin/settings', array (
+				'name' => $settings->name,
+				'description' => $settings->description,
+				'about' => strip_tags( $settings->about ),
+				'rules' => json_decode( strip_tags( $settings->rules ) ),
+				'join' => $settings->join,
+			)
+		);
 	}
 }
