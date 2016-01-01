@@ -40,4 +40,34 @@ class Admin extends CI_Controller {
 		redirect('admin/users');
 
 	}
+
+	public function layout()
+	{
+		$config['upload_path'] 		= './images/';
+		$config['allowed_types'] 	= 'gif|jpg|png';
+		$config['max_size']			= '4048';
+		$config['max_width']  		= '1200';
+		$config['max_height']  		= '500';
+		$config['encrypt_name']		= false;
+        $config['file_name'] = "1-banner.png";
+
+		$this->load->library('upload', $config);
+		if ($_SERVER['REQUEST_METHOD'] == 'POST')
+		{
+			$this->guild_model->set_banner();
+			if(  $_FILES && $_FILES['banner']['name'] && !$this->upload->do_upload( 'banner' ) )
+			{
+				$this->session->set_flashdata('alert', 'Upload failed.' );
+			}
+			else
+			{				
+				$this->session->set_flashdata('success', 'Upload successful.' );
+			}
+		}
+
+		$banner = $this->guild_model->get_banner( 1 );
+		$this->load->view( 'admin/layout', array(
+			'banner'	=> $banner
+		));
+	}
 }

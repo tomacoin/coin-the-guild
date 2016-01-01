@@ -58,7 +58,47 @@ class Guild_model extends CI_Model {
 
     function get_settings ( $gid ) 
     {
+    }
 
+    function get_banner ( $gid )
+    {
+        $banner = glob( "images/{$gid}-banner.*" );
+        if( !empty( glob( "images/{$gid}-banner.*" ) ) )
+        {
+            return $banner[0];
+        }
+        return 'images/default-banner.png';
+    }
+
+    function set_banner ()
+    {
+        $this->load->helper('file');        
+        $this->load->model('guild_model');
+
+        if( $_FILES && $_FILES['banner']['name'] )
+        {
+            $current = $this->guild_model->get_banner( 1 );
+            if( $current != "images/default-banner.png" )
+            {
+                unlink( $current );
+            }
+        }
+
+        $upload = $this->upload->data();
+        if( $upload )
+        {
+            $this->load->library('image_lib');
+            $config['source_image'] = 'images/' . $upload['file_name'];
+            $config['maintain_ratio'] = TRUE;
+            $config['width']     = 1200;
+            $config['height']   = 500;
+
+            $this->image_lib->initialize($config);
+            $this->image_lib->resize();
+            $this->image_lib->clear();
+
+            //unlink( 'images/' . $avatar );
+        }
     }
 
     function get_members ( $gid ) 

@@ -2,6 +2,7 @@
 $uid = $this->session->userdata('uid');
 $username = $this->session->userdata('username');
 $guild = $this->gm->get_name( 1 );
+$banner = $this->gm->get_banner( 1 );
 $is_member = $this->gm->is_member( 1, $uid );
 ?>
 <!doctype html>
@@ -21,13 +22,8 @@ $is_member = $this->gm->is_member( 1, $uid );
     <div class="row">
         <div class="large-12 columns">
             <div class="row">
-                <div class="large-12 hide-for-small">
-                    <img src="http://placehold.it/1200x500&text=Header">
-            </div>
-            </div>
-            <div class="row">
-                <div class="large-12 columns show-for-small">
-                    <img src="http://placehold.it/1200x700&text=Mobile Header">
+                <div class="large-12">
+                    <img src="<?php echo base_url() . $banner ?>">
                 </div>
             </div>
             <div class="row">
