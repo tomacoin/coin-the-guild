@@ -6,7 +6,7 @@ class Guild extends CI_Controller {
 	public function __construct()
 	{
 		parent::__construct();
-		$this->load->model('Guild_model', 'gm');
+		$this->load->model('Guild_model', 'guild_model');
 	}
 
 	public function index()
@@ -16,9 +16,9 @@ class Guild extends CI_Controller {
 
 	public function join()
 	{
-		if( !$this->gm->is_member( 1, $this->session->userdata('uid') ) )
+		if( !$this->guild_model->is_member( 1, $this->session->userdata('uid') ) )
 		{
-			$this->gm->join( 1, $this->session->userdata('uid') );
+			$this->guild_model->join( 1, $this->session->userdata('uid') );
 			$this->session->set_flashdata( 'new_member', true );
 		}
 
@@ -33,9 +33,9 @@ class Guild extends CI_Controller {
 		$this->form_validation->set_rules( 'guild_name', 'Guild Name', 'trim|required|min_length[4]' );
 		$this->form_validation->set_rules( 'guild_desc', 'Guild Description', 'trim' );
 
-		$this->form_validation->set_rules( 'username', 'Username', 'trim|required|min_length[4]' );
+		$this->form_validation->set_rules( 'username', 'Username', 'trim|required|min_length[3]' );
 		$this->form_validation->set_rules( 'email', 'Email', 'trim|required|valid_email' );
-		$this->form_validation->set_rules( 'password', 'Password', 'trim|required|min_length[4]|max_length[32]' );
+		$this->form_validation->set_rules( 'password', 'Password', 'trim|required|min_length[6]|max_length[32]' );
 		$this->form_validation->set_rules( 'password2', 'Password Confirmation', 'trim|required|matches[password]' );
 
 		if( $this->form_validation->run() == FALSE )
@@ -49,7 +49,7 @@ class Guild extends CI_Controller {
 
 			$this->user_model->create_user();
 			$this->user_model->login( $username, $password );
-			$this->gm->create_guild();
+			$this->guild_model->create_guild();
 			$this->index();
 		}
 	}
