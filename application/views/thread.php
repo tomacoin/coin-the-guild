@@ -156,10 +156,10 @@
                             <fieldset class="reply">
                             <legend>Post Reply</legend>
                             <?php if( $this->session->userdata('username') ): ?>
-                              <?php echo form_open(""); ?>                                    
-                                    <?php echo validation_errors('<p class="error">'); ?>
+                              <?php echo form_open(""); ?>
                                     <input type="hidden" name="thread" id="thread" value="<?php echo $thread->tid; ?>">
                                     <textarea placeholder="Enter Reply" name="reply" id="reply" rows="12"></textarea>
+                                    <div class="form-error"><?php echo form_error('reply') ?></div>
                                     <input class="button secondary" type="submit" value="Post">                                
                               <?php echo form_close(); ?>
                             <?php else: ?>

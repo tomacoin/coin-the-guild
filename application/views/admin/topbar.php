@@ -40,7 +40,7 @@
              
             <li class="name">
                 <h1>
-                    <a href="#">
+                    <a href="/">
                         <?php echo $guild; ?>
                     </a>
                 </h1>

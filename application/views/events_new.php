@@ -7,30 +7,36 @@
                 <h4>New Event</h4><hr>
                 <?php if( $this->session->userdata('username') ): ?>
                   <?php echo form_open(""); ?>
-                        <?php echo validation_errors('<p class="error">'); ?>
-                          <input type="text" placeholder="Event Name" name="name" id="name" />
-                          <textarea placeholder="Event Description" name="desc" id="desc" rows="4" /></textarea>
-                          <label>Location</label>
-                          <input type="text" placeholder="Location" name="location" id="location" />
-                          <label>Start Date</label>
-                          <input type="text" placeholder="YYYY-MM-DD" name="startdate" id="startdate" />
-                          <label>Start Time</label>
-                          <input type="text" placeholder="HH:MM" name="starttime" id="starttime" />
-                          <label>End Date</label>
-                          <input type="text" placeholder="YYYY-MM-DD" name="enddate" id="enddate" />
-                          <label>End Time</label>
-                          <input type="text" placeholder="HH:MM" name="endtime" id="endtime" />
+                        <label>Event Name</label>
+                        <input type="text" placeholder="Event Name" name="name" id="name" value="<?php echo set_value('name') ?>" />
+                        <div class="form-error"><?php echo form_error('name') ?></div>
+                        <label>Description</label>
+                        <textarea placeholder="Event Description" name="desc" id="desc" rows="4" /><?php echo set_value('desc') ?></textarea>
+                        <div class="form-error"><?php echo form_error('desc') ?></div>
+                        <label>Location</label>
+                        <input type="text" placeholder="Location" name="location" id="location" value="<?php echo set_value('location') ?>" />
+                        <label>Start Date</label>
+                        <input type="text" placeholder="YYYY-MM-DD" name="startdate" id="startdate" value="<?php echo set_value('startdate') ?>" />
+                        <div class="form-error"><?php echo form_error('startdate') ?></div>
+                        <label>Start Time</label>
+                        <input type="text" placeholder="HH:MM" name="starttime" id="starttime" value="<?php echo set_value('starttime') ?>" />
+                        <label>End Date</label>
+                        <input type="text" placeholder="YYYY-MM-DD" name="enddate" id="enddate" value="<?php echo set_value('enddate') ?>" />
+                        <div class="form-error"><?php echo form_error('enddate') ?></div>
+                        <label>End Time</label>
+                        <input type="text" placeholder="HH:MM" name="endtime" id="endtime" value="<?php echo set_value('endtime') ?>" />
                         <br />
                         <label>Occurence</label>
                         <input type="radio" name="occurence" value="0">One-Time<br>
                         <input type="radio" name="occurence" value="1">Daily<br>
                         <input type="radio" name="occurence" value="7">Weekly<br />
                         <input type="radio" name="occurence" value="30">Monthly<br />
+                        <div class="form-error"><?php echo form_error('occurence') ?></div>
                         <br />
                         <input class="button secondary" type="submit" value="Post">                                
                   <?php echo form_close(); ?>
                 <?php else: ?>
-                    <p>You must be a member in order to reply.</p>
+                    <p>You must be logged in to create an event.</p>
                 <?php endif; ?>                
             </div>
 

@@ -180,7 +180,7 @@ class Guild_model extends CI_Model {
         $this->db->insert( 'membership', $data );
 
         $newdata = array(
-            'avatar'    => 'default.jpg',
+            'avatar'    => 'default.png',
             'role'      => $role
         );
         $this->session->set_userdata( $newdata );

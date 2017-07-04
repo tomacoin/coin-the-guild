@@ -6443,3 +6443,25 @@ a.item {
   font-weight: normal;
   line-height: 1.5;
 }
+
+.form-error {
+  color: #d26060;
+}
+
+.form-error p {
+  margin: 0;
+  margin-top: -15px;
+  font-size: 12px;
+}
+
+.login .form-error p, .register .form-error p {
+  margin-top: -25px;  
+}
+
+.form-error p:last-child {
+  margin-bottom: 30px;
+}
+
+input[type="radio"] {
+    margin-right: 5px;
+}

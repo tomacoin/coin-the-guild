@@ -7,6 +7,7 @@ class User extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->model('user_model');
+		$this->load->library( 'form_validation' );
 	}
 
 	public function index()
@@ -23,11 +24,14 @@ class User extends CI_Controller {
 	
 	public function login()
 	{
+		$this->form_validation->set_rules( 'username', 'Username', 'trim|required|min_length[3]' );
+		$this->form_validation->set_rules( 'password', 'Password', 'trim|required|min_length[6]|max_length[32]' );
+
 		$username = $this->input->post('username');
 		$password = md5($this->input->post('password'));
 
 		$result = $this->user_model->login($username,$password);
-		if($result) {
+		if( $this->form_validation->run() && $result ) {
 			redirect('/');
 		} else  {
 			$this->load->view( 'login', array( 'error' => 'Invalid username or password' ) );
@@ -36,11 +40,9 @@ class User extends CI_Controller {
 
 	public function register()
 	{
-		$this->load->library( 'form_validation' );
-
-		$this->form_validation->set_rules( 'username', 'Username', 'trim|required|min_length[4]' );
+		$this->form_validation->set_rules( 'username', 'Username', 'trim|required|min_length[3]' );
 		$this->form_validation->set_rules( 'email', 'Email', 'trim|required|valid_email' );
-		$this->form_validation->set_rules( 'password', 'Password', 'trim|required|min_length[4]|max_length[32]' );
+		$this->form_validation->set_rules( 'password', 'Password', 'trim|required|min_length[6]|max_length[32]' );
 		$this->form_validation->set_rules( 'password2', 'Password Confirmation', 'trim|required|matches[password]' );
 		$taken = $this->user_model->get_uid( $this->input->post( 'username' ) );
 		if( $this->form_validation->run() == FALSE || $taken )
